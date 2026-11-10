@@ -1,0 +1,1766 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>51吃瓜 - 娱乐八卦与热门事件聚合</title>
+  <meta name="description" content="51吃瓜汇聚明星八卦、影视综艺新动态与网络热门事件，提供最新吃瓜条目、深度解析、榜单与社区讨论，方便娱乐资讯爱好者快速浏览和追踪。">
+  <meta name="keywords" content="明星八卦, 综艺动态, 影视热点, 网络事件, 娱乐榜单">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23e85d4a'/%3E%3Ctext x='50' y='68' font-size='48' text-anchor='middle' fill='white' font-family='sans-serif'%3E51%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #f9f6f2;
+      --surface: #ffffff;
+      --surface-soft: #fdf9f6;
+      --ink: #1e1c1a;
+      --ink-soft: #4a4642;
+      --muted: #7a726c;
+      --line: #e8e0da;
+      --brand: #d94f3a;
+      --brand-soft: #fbebe8;
+      --brand-dark: #a83a2a;
+      --accent: #2a6f6f;
+      --accent-soft: #e5f0ef;
+      --gold: #b8863a;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --shadow-sm: 0 1px 3px rgba(30, 28, 26, 0.04), 0 1px 2px rgba(30, 28, 26, 0.03);
+      --shadow-md: 0 4px 14px rgba(30, 28, 26, 0.06);
+      --font-sans: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+      --max-width: 1360px;
+      --announce-h: 40px;
+      --header-h: 64px;
+      --sticky-offset: calc(var(--announce-h) + var(--header-h) + 10px);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-padding-top: var(--sticky-offset);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--brand-dark);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* 吸顶公告条 */
+    .announce-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--brand);
+      color: #fff;
+      font-size: 0.85rem;
+      height: var(--announce-h);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 1rem;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+
+    .announce-bar strong {
+      font-weight: 600;
+      margin-right: 0.35em;
+    }
+
+    /* 吸顶页头 */
+    .site-header {
+      position: sticky;
+      top: var(--announce-h);
+      z-index: 99;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+      height: var(--header-h);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-shrink: 0;
+    }
+
+    .brand svg {
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .brand-text span {
+      color: var(--brand);
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 0.25rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .main-nav a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink-soft);
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .main-nav a:hover {
+      background: var(--brand-soft);
+      color: var(--brand-dark);
+      text-decoration: none;
+    }
+
+    /* 主容器 */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* 首屏 */
+    .hero {
+      background: linear-gradient(135deg, #fff7f4 0%, #fdf0ec 60%, #faf4f0 100%);
+      border-bottom: 1px solid var(--line);
+      padding: 2.5rem 0 2rem;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 0.8fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      max-width: 36rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background: var(--brand-dark);
+      text-decoration: none;
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: transparent;
+      color: var(--brand-dark);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: 999px;
+      border: 1.5px solid var(--brand);
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-outline:hover {
+      background: var(--brand-soft);
+      text-decoration: none;
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-visual svg {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      filter: drop-shadow(0 8px 24px rgba(217, 79, 58, 0.15));
+    }
+
+    /* 三栏布局 */
+    .layout-3col {
+      display: grid;
+      grid-template-columns: 180px 1fr 260px;
+      gap: 1.5rem;
+      padding: 2rem 0 3rem;
+    }
+
+    /* 左频道栏 */
+    .channel-sidebar {
+      position: sticky;
+      top: var(--sticky-offset);
+      align-self: start;
+    }
+
+    .channel-sidebar h2 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+      padding-left: 0.5rem;
+    }
+
+    .channel-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .channel-list a {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink-soft);
+      padding: 0.45rem 0.65rem;
+      border-radius: var(--radius-sm);
+      transition: background 0.2s;
+    }
+
+    .channel-list a:hover {
+      background: var(--brand-soft);
+      color: var(--brand-dark);
+      text-decoration: none;
+    }
+
+    .channel-list a .count {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-left: 0.35rem;
+      font-weight: 400;
+    }
+
+    /* 主内容区 */
+    .main-content {
+      min-width: 0;
+    }
+
+    /* 右辅助栏 */
+    .right-sidebar {
+      position: sticky;
+      top: var(--sticky-offset);
+      align-self: start;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* 板块通用 */
+    .section {
+      margin-bottom: 2.5rem;
+    }
+
+    .section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .section-header h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .section-header .more-link {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--brand);
+    }
+
+    .section-intro {
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    /* 概览 */
+    .overview-text {
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      line-height: 1.8;
+      background: var(--surface);
+      padding: 1.25rem 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+    }
+
+    .overview-text p {
+      margin-bottom: 0.75rem;
+    }
+
+    .overview-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .card-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: var(--surface-soft);
+    }
+
+    .card-body {
+      padding: 0.85rem 1rem 1rem;
+    }
+
+    .card-cat {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--brand-dark);
+      background: var(--brand-soft);
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      line-height: 1.55;
+      margin-bottom: 0.5rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+      flex-wrap: wrap;
+    }
+
+    .card-meta .tag {
+      background: var(--surface-soft);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+    }
+
+    .card-meta .hot {
+      color: var(--brand);
+      font-weight: 600;
+    }
+
+    /* 紧凑列表 */
+    .compact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .compact-list li {
+      display: flex;
+      gap: 0.65rem;
+      align-items: baseline;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px dashed var(--line);
+    }
+
+    .compact-list li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .compact-list .time {
+      font-size: 0.72rem;
+      color: var(--muted);
+      white-space: nowrap;
+      min-width: 5rem;
+    }
+
+    .compact-list .title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.45;
+    }
+
+    .compact-list .summary {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
+
+    /* 分类入口 */
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+    }
+
+    .cat-item {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 0.75rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--ink);
+      transition: background 0.2s, border-color 0.2s;
+      text-decoration: none;
+    }
+
+    .cat-item:hover {
+      background: var(--brand-soft);
+      border-color: var(--brand);
+      color: var(--brand-dark);
+      text-decoration: none;
+    }
+
+    .cat-item .cat-count {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+
+    /* 深度解析 */
+    .deep-dive {
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      padding: 1.5rem;
+    }
+
+    .deep-dive h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 1.25rem 0 0.5rem;
+    }
+
+    .deep-dive h3:first-of-type {
+      margin-top: 0;
+    }
+
+    .deep-dive p {
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      line-height: 1.75;
+      margin-bottom: 0.65rem;
+    }
+
+    .deep-dive ul {
+      margin: 0.5rem 0 0.75rem 1.25rem;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    .deep-dive li {
+      margin-bottom: 0.25rem;
+    }
+
+    /* 体验指南 */
+    .guide-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .guide-step {
+      display: flex;
+      gap: 0.85rem;
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      padding: 1rem 1.15rem;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--brand);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-content h4 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+
+    .step-content p {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    details.faq-item {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    details.faq-item summary {
+      padding: 0.85rem 1.15rem;
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--ink);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    details.faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.faq-item summary::after {
+      content: '+';
+      font-size: 1.2rem;
+      color: var(--brand);
+      font-weight: 400;
+      transition: transform 0.2s;
+    }
+
+    details.faq-item[open] summary::after {
+      content: '−';
+    }
+
+    details.faq-item .faq-answer {
+      padding: 0 1.15rem 1rem;
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    /* 评论 */
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .comment-item {
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      padding: 0.85rem 1rem;
+    }
+
+    .comment-head {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      margin-bottom: 0.3rem;
+    }
+
+    .comment-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--brand-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--brand-dark);
+      flex-shrink: 0;
+    }
+
+    .comment-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .comment-time {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-left: auto;
+    }
+
+    .comment-text {
+      font-size: 0.86rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    /* 资讯 */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .news-card {
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .news-card img {
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+      background: var(--surface-soft);
+    }
+
+    .news-card-body {
+      padding: 0.85rem 1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .news-date {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .news-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+      line-height: 1.4;
+    }
+
+    .news-summary {
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+
+    /* 相关推荐标签 */
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag-cloud a {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--ink-soft);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .tag-cloud a:hover {
+      background: var(--brand-soft);
+      border-color: var(--brand);
+      color: var(--brand-dark);
+      text-decoration: none;
+    }
+
+    /* 榜单 */
+    .ranking-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .ranking-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      padding: 0.65rem 0.85rem;
+    }
+
+    .rank-num {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--surface-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .rank-num.top {
+      background: var(--brand);
+      color: #fff;
+    }
+
+    .rank-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .rank-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .rank-meta {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .rank-hot {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--brand);
+      flex-shrink: 0;
+    }
+
+    /* 右侧栏卡片 */
+    .sidebar-card {
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      padding: 1rem;
+    }
+
+    .sidebar-card h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.65rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .sidebar-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .sidebar-list li {
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      line-height: 1.45;
+    }
+
+    .sidebar-list .s-time {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    /* 页尾 */
+    .site-footer {
+      background: #2b2623;
+      color: #c9c0b9;
+      padding: 2.5rem 0 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .footer-brand svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .footer-brand-text {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .footer-desc {
+      font-size: 0.82rem;
+      color: #a89f97;
+      line-height: 1.7;
+      max-width: 28rem;
+    }
+
+    .footer-col h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .footer-col a {
+      font-size: 0.82rem;
+      color: #a89f97;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #3d3733;
+      padding-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: #8a8179;
+    }
+
+    /* 响应式 */
+    @media (max-width: 1024px) {
+      .layout-3col {
+        grid-template-columns: 160px 1fr;
+      }
+      .right-sidebar {
+        display: none;
+      }
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+      .hero-visual {
+        display: none;
+      }
+      .cat-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 740px) {
+      .layout-3col {
+        grid-template-columns: 1fr;
+      }
+      .channel-sidebar {
+        position: static;
+        order: -1;
+      }
+      .channel-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+      }
+      .channel-list a {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        padding: 0.35rem 0.65rem;
+        font-size: 0.82rem;
+      }
+      .hero-content h1 {
+        font-size: 1.9rem;
+      }
+      .main-nav {
+        display: none;
+      }
+      .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+      .cat-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      .news-grid {
+        grid-template-columns: 1fr;
+      }
+      .brand-text {
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-content h1 {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* 焦点可见 */
+    a:focus-visible,
+    button:focus-visible,
+    summary:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+  </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+  <!-- 吸顶公告条 -->
+  <div class="announce-bar" role="status">
+    <strong>今日吃瓜</strong> 11月8日新增 16 条动态 · 金鸡奖提名热议 · 《逆风告白》大结局上线
+  </div>
+
+  <!-- 吸顶页头 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="50" cy="50" r="46" fill="#d94f3a"/>
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#fff" stroke-width="2" opacity="0.4"/>
+          <text x="50" y="64" font-size="36" text-anchor="middle" fill="#fff" font-family="sans-serif" font-weight="800">51</text>
+        </svg>
+        <div class="brand-text">51<span>吃瓜</span></div>
+      </div>
+      <nav class="main-nav" aria-label="主导航">
+        <a href="/#hot">热门事件</a>
+        <a href="/#star">明星动态</a>
+        <a href="/#drama">影视剧集</a>
+        <a href="/#variety">综艺节目</a>
+        <a href="/#ranking">热度榜单</a>
+        <a href="/#news">相关资讯</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 首屏 -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <h1>51吃瓜</h1>
+        <p class="hero-desc">汇集明星八卦、影视综艺新动态与网络热门事件，追踪金鸡奖提名、热播剧集大结局、综艺路透和社区讨论焦点，提供可搜索的具体条目与话题解析。</p>
+        <div class="hero-actions">
+          <a href="/#hot" class="btn-primary">看今日热点 →</a>
+          <a href="/#ranking" class="btn-outline">热度榜单</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#d94f3a" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#f2a08e" stop-opacity="0.6"/>
+            </linearGradient>
+            <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#2a6f6f" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#7bb8b0" stop-opacity="0.5"/>
+            </linearGradient>
+          </defs>
+          <circle cx="140" cy="130" r="90" fill="url(#g1)"/>
+          <circle cx="260" cy="200" r="70" fill="url(#g2)"/>
+          <rect x="60" y="200" width="120" height="16" rx="8" fill="#d94f3a" opacity="0.5"/>
+          <rect x="60" y="228" width="80" height="12" rx="6" fill="#2a6f6f" opacity="0.4"/>
+          <rect x="200" y="80" width="100" height="14" rx="7" fill="#d94f3a" opacity="0.4"/>
+          <rect x="200" y="104" width="140" height="10" rx="5" fill="#2a6f6f" opacity="0.3"/>
+          <circle cx="90" cy="60" r="12" fill="#d94f3a" opacity="0.3"/>
+          <circle cx="340" cy="100" r="8" fill="#b8863a" opacity="0.5"/>
+          <circle cx="320" cy="280" r="18" fill="#d94f3a" opacity="0.2"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 主内容区：三栏门户 -->
+  <div class="container layout-3col">
+
+    <!-- 左频道索引 -->
+    <aside class="channel-sidebar">
+      <h2>频道分类</h2>
+      <ul class="channel-list">
+        <li><a href="/#hot">热门事件<span class="count">28</span></a></li>
+        <li><a href="/#star">明星动态<span class="count">42</span></a></li>
+        <li><a href="/#drama">影视剧集<span class="count">36</span></a></li>
+        <li><a href="/#variety">综艺节目<span class="count">19</span></a></li>
+        <li><a href="/#ranking">热度榜单<span class="count">10</span></a></li>
+        <li><a href="/#news">相关资讯<span class="count">15</span></a></li>
+        <li><a href="/#deep">深度解析<span class="count">6</span></a></li>
+        <li><a href="/#guide">体验指南<span class="count">5</span></a></li>
+        <li><a href="/#faq">常见问答<span class="count">6</span></a></li>
+        <li><a href="/#comments">用户评论<span class="count">16</span></a></li>
+      </ul>
+    </aside>
+
+    <!-- 主内容 -->
+    <main class="main-content">
+
+      <!-- 板块1：主题领域概览 -->
+      <section class="section" id="overview">
+        <div class="section-header">
+          <h2>娱乐吃瓜领域概览</h2>
+        </div>
+        <div class="overview-text">
+          <p>51吃瓜所覆盖的娱乐内容，大致围绕几个具体方向展开：电影与剧集的上映动态和口碑表现、综艺节目的嘉宾阵容与赛制变化、明星个人的公开行程与社交媒体发言、以及网络社群中发酵的争议话题和名场面。2026 年 11 月上旬，电影领域最受关注的是第 38 届金鸡奖提名名单公布，《长安的荔枝》《逆风告白》等片进入主要奖项角逐；剧集方面，《逆风告白》于 11 月 7 日上线大结局，社区讨论集中在收尾节奏上；综艺《一路繁花 2》公布新一季嘉宾，路透片段在社交平台传播。</p>
+          <p>从类型来看，吃瓜内容可以分成“作品向”和“人物向”两条线。作品向关注一部剧或一档综艺的具体表现，比如首播收视、豆瓣开分、名场面出处；人物向则追踪明星的公开动态、采访发言和同框互动。两条线经常交叉，比如某位演员在新剧中的表现会连带其过往作品被重新讨论。想跟上节奏，可以优先看剧集定档和颁奖季节点，再根据兴趣延伸到具体人物的动态线。</p>
+        </div>
+      </section>
+
+      <!-- 板块2：精选内容推荐 -->
+      <section class="section" id="hot">
+        <div class="section-header">
+          <h2>今日精选吃瓜条目</h2>
+          <a href="/#ranking" class="more-link">查看榜单 →</a>
+        </div>
+        <div class="card-grid">
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/nifenggaobai08/400/300" alt="逆风告白大结局剧照" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <span class="card-cat">影视剧集</span>
+              <h3 class="card-title">《逆风告白》大结局上线</h3>
+              <p class="card-desc">11 月 7 日收官，主角线收束方式引发两极讨论，社区集中在第 24 集的独白段落。</p>
+              <div class="card-meta">
+                <span class="tag">都市情感</span>
+                <span class="tag">收官</span>
+                <span class="hot">热度 9.4</span>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/jinjijiang38/400/300" alt="金鸡奖提名发布会现场" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <span class="card-cat">电影奖项</span>
+              <h3 class="card-title">第 38 届金鸡奖提名公布</h3>
+              <p class="card-desc">《长安的荔枝》获六项提名领跑，最佳男主角竞争在三位中生代演员之间展开。</p>
+              <div class="card-meta">
+                <span class="tag">颁奖季</span>
+                <span class="tag">提名</span>
+                <span class="hot">热度 9.2</span>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/yilufanhua2/400/300" alt="一路繁花2嘉宾阵容路透" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <span class="card-cat">综艺节目</span>
+              <h3 class="card-title">《一路繁花 2》阵容官宣</h3>
+              <p class="card-desc">新一季六位常驻嘉宾公布，首站录制路透显示延续旅行加对谈的模式。</p>
+              <div class="card-meta">
+                <span class="tag">旅行综艺</span>
+                <span class="tag">官宣</span>
+                <span class="hot">热度 8.9</span>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/zhangxiaofei11/400/300" alt="张小斐新片路演现场" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <span class="card-cat">明星动态</span>
+              <h3 class="card-title">张小斐新片路演发言</h3>
+              <p class="card-desc">在成都站路演中谈及角色准备过程，相关采访片段在短视频平台获得高转发。</p>
+              <div class="card-meta">
+                <span class="tag">路演</span>
+                <span class="tag">采访</span>
+                <span class="hot">热度 8.6</span>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/changanlizhi09/400/300" alt="长安的荔枝电影海报" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <span class="card-cat">电影</span>
+              <h3 class="card-title">《长安的荔枝》点映口碑</h3>
+              <p class="card-desc">点映场次结束后，观众讨论集中在叙事节奏和美术还原度，原著粉给出不同评价。</p>
+              <div class="card-meta">
+                <span class="tag">古装</span>
+                <span class="tag">点映</span>
+                <span class="hot">热度 8.7</span>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/wangyibo112/400/300" alt="王一博品牌活动造型" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <span class="card-cat">明星动态</span>
+              <h3 class="card-title">王一博出席品牌大秀</h3>
+              <p class="card-desc">11 月 6 日上海品牌活动，造型与现场互动视频成为社交平台讨论点。</p>
+              <div class="card-meta">
+                <span class="tag">品牌活动</span>
+                <span class="tag">造型</span>
+                <span class="hot">热度 8.5</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 板块3：最新更新 / 动态 -->
+      <section class="section" id="star">
+        <div class="section-header">
+          <h2>最新吃瓜动态</h2>
+        </div>
+        <ul class="compact-list">
+          <li>
+            <span class="time">今天 09:30</span>
+            <div>
+              <div class="title">《逆风告白》大结局弹幕总量破百万</div>
+              <div class="summary">平台公布收官数据，第 24 集单集弹幕量创下该剧场年度纪录。</div>
+            </div>
+          </li>
+          <li>
+            <span class="time">今天 08:15</span>
+            <div>
+              <div class="title">金鸡奖最佳女主角提名名单解读</div>
+              <div class="summary">五位提名者中三位首次入围，影评人社区开始预测投票走向。</div>
+            </div>
+          </li>
+          <li>
+            <span class="time">昨天 21:10</span>
+            <div>
+              <div class="title">《一路繁花 2》首站录制结束</div>
+              <div class="summary">嘉宾在泉州完成三天录制，路透显示有素人互动环节。</div>
+            </div>
+          </li>
+          <li>
+            <span class="time">昨天 18:40</span>
+            <div>
+              <div class="title">《长安的荔枝》开启全国路演</div>
+              <div class="summary">导演与主演将先后前往八座城市，首站西安场门票已约满。</div>
+            </div>
+          </li>
+          <li>
+            <span class="time">11 月 6 日</span>
+            <div>
+              <div class="title">综艺《今晚好戏》公布第四期嘉宾</div>
+              <div class="summary">两位喜剧演员与一位歌手加盟，本期主题定为“即兴搭档”。</div>
+            </div>
+          </li>
+          <li>
+            <span class="time">11 月 5 日</span>
+            <div>
+              <div class="title">张译新剧《边城谜案》发布首支预告</div>
+              <div class="summary">悬疑题材，预告片透露双线叙事结构，定档 12 月上线。</div>
+            </div>
+          </li>
+          <li>
+            <span class="time">11 月 4 日</span>
+            <div>
+              <div class="title">某品牌官宣新任代言人引发讨论</div>
+              <div class="summary">社交平台出现代言物料对比帖，讨论集中在品牌调性匹配度。</div>
+            </div>
+          </li>
+          <li>
+            <span class="time">11 月 3 日</span>
+            <div>
+              <div class="title">《乐队的秋天 3》公布参赛名单</div>
+              <div class="summary">十二支乐队入围，其中四支为首次参加综艺竞演。</div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 板块4：分类入口 -->
+      <section class="section" id="drama">
+        <div class="section-header">
+          <h2>按类别找瓜</h2>
+        </div>
+        <div class="cat-grid">
+          <a href="/#hot" class="cat-item">明星八卦<span class="cat-count">42 条</span></a>
+          <a href="/#drama" class="cat-item">影视剧集<span class="cat-count">36 条</span></a>
+          <a href="/#variety" class="cat-item">综艺节目<span class="cat-count">19 条</span></a>
+          <a href="/#ranking" class="cat-item">颁奖季<span class="cat-count">11 条</span></a>
+          <a href="/#news" class="cat-item">品牌活动<span class="cat-count">8 条</span></a>
+          <a href="/#comments" class="cat-item">社区热议<span class="cat-count">23 条</span></a>
+          <a href="/#star" class="cat-item">路透现场<span class="cat-count">14 条</span></a>
+          <a href="/#deep" class="cat-item">深度解析<span class="cat-count">6 条</span></a>
+        </div>
+      </section>
+
+      <!-- 板块5：深度解析正文 -->
+      <section class="section" id="deep">
+        <div class="section-header">
+          <h2>深度解析：近期娱乐话题怎么看</h2>
+        </div>
+        <div class="deep-dive">
+          <h3>金鸡奖提名名单里的几个信号</h3>
+          <p>第 38 届金鸡奖提名在 11 月 5 日公布后，讨论热度集中在最佳故事片和表演奖项。从提名分布看，《长安的荔枝》以六项提名领跑，覆盖导演、男主角、美术和摄影等技术类奖项，说明评审对其整体制作水准的认可度较高。另一部受到关注的是《逆风告白》，虽然剧集版本热度更高，但电影版获得了最佳改编剧本提名，这种跨媒介的提名在近年奖项中并不多见。</p>
+          <p>表演奖项方面，最佳男主角的五位提名者中有两位是首次入围。从过往几届的投票习惯看，评审倾向于在“突破性表演”和“稳定发挥”之间做平衡。今年这个类别没有绝对热门，社区讨论中不同影迷群体的意见分歧明显，这也是颁奖季前期话题度高的原因之一。</p>
+
+          <h3>《逆风告白》收官讨论的两种声音</h3>
+          <p>这部剧集在 11 月 7 日上线大结局后，社交平台出现两种主要评价。一种认为第 24 集的独白段落处理得克制，把主角的成长线收得完整；另一种认为后半程节奏偏慢，配角线收束仓促。从数据看，大结局当晚的弹幕总量突破百万，说明观众参与度很高，但评分从开分 8.1 微调至 7.9，反映出部分观众的失望情绪。</p>
+          <p>类似的情况在近年都市情感剧中并不少见：前期口碑走高，结局一旦偏离预期就会引发集中讨论。对于想补剧的观众，比较实用的判断方法是先看第 1 到 4 集确认风格是否对味，再决定是否追完全程，不必被结局争议直接劝退。</p>
+
+          <h3>综艺路透和官宣信息的可信度分层</h3>
+          <p>围绕《一路繁花 2》的阵容信息，目前流传的版本可以分成几层：官方发布会和平台账号发布的内容属于确认信息；嘉宾机场图、录制地路透属于高可信度的间接信息；社交平台匿名爆料则需要谨慎对待。区分这些层级，能减少被不实信息带偏的情况。</p>
+          <ul>
+            <li>官方渠道：节目组发布会、平台排播表、嘉宾本人确认。</li>
+            <li>间接可信：现场路透图、录制地公开信息、工作人员社交动态。</li>
+            <li>谨慎对待：匿名论坛帖、无来源截图、二次加工的“爆料汇总”。</li>
+          </ul>
+
+          <h3>明星品牌活动的关注点</h3>
+          <p>品牌活动类内容在 51吃瓜 的条目中占比不低，但关注价值不在于“谁穿了什么”本身，而在于活动释放的信号：新代言往往对应品牌下一阶段的推广方向，活动造型和互动片段则可能影响后续影视项目的选角讨论。看这类条目时，可以留意品牌层级、活动规格和同场出席的嘉宾组合，比单看造型图更有信息量。</p>
+        </div>
+      </section>
+
+      <!-- 板块6：体验指南 -->
+      <section class="section" id="guide">
+        <div class="section-header">
+          <h2>吃瓜消费顺序指南</h2>
+        </div>
+        <div class="guide-steps">
+          <div class="guide-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>先确认作品向还是人物向</h4>
+              <p>如果你关心的是剧集好不好看，优先看影视剧集和深度解析；如果只是想跟上明星动态，从最新吃瓜动态和明星八卦入口进更快。</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>用榜单判断当下讨论集中在哪里</h4>
+              <p>热度榜单反映的是近 48 小时的讨论密度，适合快速定位“现在大家在聊什么”，再决定是否深入具体条目。</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>区分官方信息与路透信息</h4>
+              <p>官宣、定档、预告属于确认信息；路透图和匿名爆料需要交叉验证。花几分钟看来源，比急着转发更省事。</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <h4>按兴趣深度决定投入时间</h4>
+              <p>只想了解大概，看条目摘要和评论即可；想形成判断，再读深度解析里的分节分析，通常 10 分钟能覆盖一个话题的核心信息。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 板块7：FAQ -->
+      <section class="section" id="faq">
+        <div class="section-header">
+          <h2>常见问题</h2>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>都市情感剧一般多久更新一次？</summary>
+            <div class="faq-answer">主流平台通常采用会员抢先看模式，首周更新 4 到 6 集，之后每周更新 3 到 4 集。《逆风告白》是每周四至周六各更新两集，会员可提前看下一集。具体排播以平台页面为准。</div>
+          </details>
+          <details class="faq-item">
+            <summary>金鸡奖提名和获奖之间一般隔多久公布？</summary>
+            <div class="faq-answer">提名名单通常在颁奖典礼前两到三周公布。第 38 届提名于 11 月 5 日发布，颁奖典礼安排在 11 月下旬，中间约有二十天的话题发酵期。</div>
+          </details>
+          <details class="faq-item">
+            <summary>《逆风告白》和《长安的荔枝》有什么区别？</summary>
+            <div class="faq-answer">两者类型不同。《逆风告白》是都市情感剧集，有电影版但剧集热度更高；《长安的荔枝》是古装电影，改编自同名小说，叙事节奏和视觉风格偏向历史题材。想找下饭剧可以看前者，想进影院看制作规格可以关注后者。</div>
+          </details>
+          <details class="faq-item">
+            <summary>第一次关注颁奖季，从哪个奖项开始看比较好？</summary>
+            <div class="faq-answer">可以从最佳故事片和最佳男女主角三个类别入手，这三个类别的讨论量最大，也最容易延伸到了解其他技术奖项。先看提名名单，再挑一两部入围作品补看，比从头追所有奖项效率更高。</div>
+          </details>
+          <details class="faq-item">
+            <summary>综艺路透信息一般可信吗？</summary>
+            <div class="faq-answer">要看来源。录制现场的清晰路透图可信度较高，但嘉宾阵容的最终版本仍以节目组官宣为准。匿名论坛的爆料帖建议先观望，等官方信息或多个独立来源交叉印证后再采信。</div>
+          </details>
+          <details class="faq-item">
+            <summary>悬疑剧《边城谜案》什么时候上线？</summary>
+            <div class="faq-answer">根据 11 月 5 日发布的预告信息，该剧定档 12 月上线，具体日期尚未公布。预告片显示为双线叙事，主演张译的角色涉及一桩旧案重启调查。</div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 板块8：用户评论 -->
+      <section class="section" id="comments">
+        <div class="section-header">
+          <h2>用户在聊什么</h2>
+        </div>
+        <div class="comment-list">
+          <div class="comment-item">
+            <div class="comment-head">
+              <div class="comment-avatar">瓜</div>
+              <span class="comment-name">吃瓜不吐籽</span>
+              <span class="comment-time">今天 10:20</span>
+            </div>
+            <p class="comment-text">《逆风告白》大结局那个独白我反复看了三遍，收得比预期好，但男二线确实有点赶。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <div class="comment-avatar">荔</div>
+              <span class="comment-name">荔枝汽水</span>
+              <span class="comment-time">今天 09:45</span>
+            </div>
+            <p class="comment-text">金鸡奖提名里《长安的荔枝》六项，美术和摄影提名我觉得很稳，男主竞争今年是真激烈。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <div class="comment-avatar">繁</div>
+              <span class="comment-name">繁花落尽</span>
+              <span class="comment-time">今天 08:30</span>
+            </div>
+            <p class="comment-text">一路繁花2的嘉宾阵容比第一季年轻化，不知道旅行综艺换血之后还能不能保持原来的味道。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <div class="comment-avatar">夜</div>
+              <span class="comment-name">夜猫子小陈</span>
+              <span class="comment-time">昨天 23:10</span>
+            </div>
+            <p class="comment-text">王一博那场品牌活动的造型讨论度好高，不过我更关心他下一部戏什么时候定。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <div class="comment-avatar">谜</div>
+              <span class="comment-name">谜案爱好者</span>
+              <span class="comment-time">昨天 21:50</span>
+            </div>
+            <p class="comment-text">边城谜案的预告片质感不错，双线叙事如果处理不好容易乱，先期待一下。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <div class="comment-avatar">路</div>
+              <span class="comment-name">路人甲乙丙</span>
+              <span class="comment-time">昨天 19:20</span>
+            </div>
+            <p class="comment-text">最近明星代言换得有点勤，刚官宣完没两个月又换人，品牌策略看不懂。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <div class="comment-avatar">乐</div>
+              <span class="comment-name">乐队的夏天粉</span>
+              <span class="comment-time">11 月 6 日</span>
+            </div>
+            <p class="comment-text">乐队的秋天3名单里有两支我一直在听的独立乐队，希望别被剪辑带偏。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <div class="comment-avatar">小</div>
+              <span class="comment-name">小满未满</span>
+              <span class="comment-time">11 月 6 日</span>
+            </div>
+            <p class="comment-text">张小斐路演那段采访讲角色准备很实在，比通稿有内容，路演发言有时候比正片好看。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <div class="comment-avatar">电</div>
+              <span class="comment-name">电影票根收藏家</span>
+              <span class="comment-time">11 月 5 日</span>
+            </div>
+            <p class="comment-text">长安的荔枝点映口碑两极，原著粉和普通观众的评价差挺多，打算自己去看看再判断。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <div class="comment-avatar">综</div>
+              <span class="comment-name">综艺观察员</span>
+              <span class="comment-time">11 月 5 日</span>
+            </div>
+            <p class="comment-text">今晚好戏第四期的即兴搭档主题挺有意思，喜剧演员加歌手的组合不知道会碰撞出什么。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 板块9：相关资讯 -->
+      <section class="section" id="news">
+        <div class="section-header">
+          <h2>相关资讯</h2>
+        </div>
+        <div class="news-grid">
+          <article class="news-card">
+            <img src="https://picsum.photos/seed/jinjijiang2026/600/400" alt="金鸡奖颁奖典礼舞台布置" width="600" height="400" loading="lazy">
+            <div class="news-card-body">
+              <div class="news-date">2026-11-07</div>
+              <h3 class="news-title">金鸡奖颁奖典礼公布主持阵容</h3>
+              <p class="news-summary">三位主持人将搭档完成颁奖礼，典礼定于 11 月 22 日在厦门举行。</p>
+            </div>
+          </article>
+          <article class="news-card">
+            <img src="https://picsum.photos/seed/nifengdajieju/600/400" alt="逆风告白收官海报" width="600" height="400" loading="lazy">
+            <div class="news-card-body">
+              <div class="news-date">2026-11-06</div>
+              <h3 class="news-title">《逆风告白》收官数据出炉</h3>
+              <p class="news-summary">会员收官日播放量居平台周榜第二，弹幕互动量创剧场年度新高。</p>
+            </div>
+          </article>
+          <article class="news-card">
+            <img src="https://picsum.photos/seed/yilufanhuaquanzhou/600/400" alt="一路繁花2泉州录制现场" width="600" height="400" loading="lazy">
+            <div class="news-card-body">
+              <div class="news-date">2026-11-05</div>
+              <h3 class="news-title">《一路繁花 2》泉州站录制路透</h3>
+              <p class="news-summary">六位嘉宾现身古城街区，节目组设置素人互动环节，预计 12 月上线。</p>
+            </div>
+          </article>
+          <article class="news-card">
+            <img src="https://picsum.photos/seed/changanlizhiluyan/600/400" alt="长安的荔枝路演现场观众" width="600" height="400" loading="lazy">
+            <div class="news-card-body">
+              <div class="news-date">2026-11-04</div>
+              <h3 class="news-title">《长安的荔枝》路演城市名单确认</h3>
+              <p class="news-summary">西安、成都、杭州等八城路演安排公布，导演将出席前三站映后交流。</p>
+            </div>
+          </article>
+          <article class="news-card">
+            <img src="https://picsum.photos/seed/bianchengmiyan/600/400" alt="边城谜案预告片画面" width="600" height="400" loading="lazy">
+            <div class="news-card-body">
+              <div class="news-date">2026-11-03</div>
+              <h3 class="news-title">《边城谜案》预告片发布 定档 12 月</h3>
+              <p class="news-summary">张译主演的悬疑剧发布首支预告，双线叙事结构首次曝光。</p>
+            </div>
+          </article>
+          <article class="news-card">
+            <img src="https://picsum.photos/seed/wanhuijiaxiang/600/400" alt="今晚好戏第四期录制现场" width="600" height="400" loading="lazy">
+            <div class="news-card-body">
+              <div class="news-date">2026-11-02</div>
+              <h3 class="news-title">《今晚好戏》公布第四期主题</h3>
+              <p class="news-summary">本期主题定为“即兴搭档”，两位喜剧演员与一位歌手加盟。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 板块10：相关推荐 -->
+      <section class="section" id="related">
+        <div class="section-header">
+          <h2>延伸方向推荐</h2>
+        </div>
+        <div class="tag-cloud">
+          <a href="/#hot">颁奖季预测</a>
+          <a href="/#drama">都市情感剧排播</a>
+          <a href="/#variety">旅行综艺路透</a>
+          <a href="/#star">明星路演采访</a>
+          <a href="/#deep">热播剧结局分析</a>
+          <a href="/#news">品牌代言变动</a>
+          <a href="/#ranking">48 小时讨论榜</a>
+          <a href="/#comments">社区争议话题</a>
+        </div>
+      </section>
+
+      <!-- 板块11：补充板块 - 热度榜单 -->
+      <section class="section" id="ranking">
+        <div class="section-header">
+          <h2>48 小时吃瓜热度榜</h2>
+        </div>
+        <ul class="ranking-list">
+          <li>
+            <span class="rank-num top">1</span>
+            <div class="rank-info">
+              <div class="rank-title">《逆风告白》大结局讨论</div>
+              <div class="rank-meta">影视剧集 · 11 月 7 日上线</div>
+            </div>
+            <span class="rank-hot">98.2</span>
+          </li>
+          <li>
+            <span class="rank-num top">2</span>
+            <div class="rank-info">
+              <div class="rank-title">金鸡奖提名名单公布</div>
+              <div class="rank-meta">电影奖项 · 11 月 5 日发布</div>
+            </div>
+            <span class="rank-hot">96.5</span>
+          </li>
+          <li>
+            <span class="rank-num top">3</span>
+            <div class="rank-info">
+              <div class="rank-title">《一路繁花 2》阵容官宣</div>
+              <div class="rank-meta">综艺节目 · 11 月 6 日官宣</div>
+            </div>
+            <span class="rank-hot">92.1</span>
+          </li>
+          <li>
+            <span class="rank-num">4</span>
+            <div class="rank-info">
+              <div class="rank-title">张小斐路演发言片段</div>
+              <div class="rank-meta">明星动态 · 11 月 6 日</div>
+            </div>
+            <span class="rank-hot">89.7</span>
+          </li>
+          <li>
+            <span class="rank-num">5</span>
+            <div class="rank-info">
+              <div class="rank-title">《长安的荔枝》点映口碑</div>
+              <div class="rank-meta">电影 · 11 月 5 日点映</div>
+            </div>
+            <span class="rank-hot">88.4</span>
+          </li>
+          <li>
+            <span class="rank-num">6</span>
+            <div class="rank-info">
+              <div class="rank-title">王一博品牌活动造型</div>
+              <div class="rank-meta">明星动态 · 11 月 6 日</div>
+            </div>
+            <span class="rank-hot">86.9</span>
+          </li>
+          <li>
+            <span class="rank-num">7</span>
+            <div class="rank-info">
+              <div class="rank-title">《边城谜案》预告发布</div>
+              <div class="rank-meta">影视剧集 · 11 月 5 日</div>
+            </div>
+            <span class="rank-hot">85.2</span>
+          </li>
+          <li>
+            <span class="rank-num">8</span>
+            <div class="rank-info">
+              <div class="rank-title">《乐队的秋天 3》名单公布</div>
+              <div class="rank-meta">综艺节目 · 11 月 3 日</div>
+            </div>
+            <span class="rank-hot">83.6</span>
+          </li>
+        </ul>
+      </section>
+
+    </main>
+
+    <!-- 右辅助栏 -->
+    <aside class="right-sidebar">
+      <div class="sidebar-card">
+        <h3>今日更新速览</h3>
+        <ul class="sidebar-list">
+          <li><span class="s-time">09:30</span> 《逆风告白》弹幕破百万</li>
+          <li><span class="s-time">08:15</span> 金鸡奖女主角提名解读</li>
+          <li><span class="s-time">昨天 21:10</span> 《一路繁花 2》首站收官</li>
+          <li><span class="s-time">昨天 18:40</span> 《长安的荔枝》路演启动</li>
+          <li><span class="s-time">11 月 6 日</span> 《今晚好戏》第四期嘉宾</li>
+          <li><span class="s-time">11 月 5 日</span> 《边城谜案》预告发布</li>
+        </ul>
+      </div>
+      <div class="sidebar-card">
+        <h3>即将上线</h3>
+        <ul class="sidebar-list">
+          <li>《边城谜案》· 12 月上线</li>
+          <li>金鸡奖颁奖典礼 · 11 月 22 日</li>
+          <li>《一路繁花 2》· 12 月首播</li>
+          <li>《乐队的秋天 3》· 11 月中旬开播</li>
+          <li>《长安的荔枝》全国公映 · 11 月 15 日</li>
+        </ul>
+      </div>
+      <div class="sidebar-card">
+        <h3>热议标签</h3>
+        <ul class="sidebar-list">
+          <li>#逆风告白大结局</li>
+          <li>#金鸡奖提名</li>
+          <li>#一路繁花2阵容</li>
+          <li>#张小斐路演</li>
+          <li>#长安的荔枝点映</li>
+          <li>#边城谜案预告</li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- 页尾 -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="32" height="32">
+              <circle cx="50" cy="50" r="46" fill="#d94f3a"/>
+              <text x="50" y="64" font-size="36" text-anchor="middle" fill="#fff" font-family="sans-serif" font-weight="800">51</text>
+            </svg>
+            <span class="footer-brand-text">51吃瓜</span>
+          </div>
+          <p class="footer-desc">追踪明星八卦、影视综艺新动态与网络热门事件，提供具体条目、深度解析和热度榜单。</p>
+        </div>
+        <div class="footer-col">
+          <h4>内容频道</h4>
+          <ul>
+            <li><a href="/#hot">热门事件</a></li>
+            <li><a href="/#star">明星动态</a></li>
+            <li><a href="/#drama">影视剧集</a></li>
+            <li><a href="/#variety">综艺节目</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>发现更多</h4>
+          <ul>
+            <li><a href="/#ranking">热度榜单</a></li>
+            <li><a href="/#deep">深度解析</a></li>
+            <li><a href="/#guide">体验指南</a></li>
+            <li><a href="/#faq">常见问答</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>社区</h4>
+          <ul>
+            <li><a href="/#comments">用户评论</a></li>
+            <li><a href="/#news">相关资讯</a></li>
+            <li><a href="/#related">延伸推荐</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 51吃瓜 · 内容聚合示例</span>
+        <span>部分内容为示例数据，仅用于展示页面结构</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+  </html>
