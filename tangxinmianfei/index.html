@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>糖心免费版 - 短剧影视聚合指南</title>
+  <meta name="description" content="糖心免费版汇聚短剧、电影、动漫等免费影视内容，提供分类导航、精选推荐、最新更新、深度解析与用户评论，适合喜欢找片看剧的观众浏览。">
+  <meta name="keywords" content="短剧推荐,免费影视,电影分类,动漫更新,剧集解析">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23c0392b'/%3E%3Cpath d='M30 50 L70 30 L70 70 Z' fill='%23f1c40f'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --brand: #c0392b;
+      --brand-dark: #962d22;
+      --brand-light: #f9e9e8;
+      --accent: #f1c40f;
+      --accent-dark: #d4ac0d;
+      --bg: #fdfaf8;
+      --surface: #ffffff;
+      --text: #1e1e1e;
+      --text-secondary: #4a4a4a;
+      --text-muted: #7a7a7a;
+      --border: #e8ddd9;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --font: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+      --announce-h: 42px;
+      --header-h: 64px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-padding-top: calc(var(--announce-h) + var(--header-h) + 16px);
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ========== 吸顶公告条 ========== */
+    .announce-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--brand-dark);
+      color: #fff;
+      height: var(--announce-h);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 14px;
+      letter-spacing: 0.3px;
+      overflow: hidden;
+    }
+    .announce-bar span {
+      display: inline-block;
+      white-space: nowrap;
+      animation: marquee 30s linear infinite;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ========== 吸顶页头 ========== */
+    .site-header {
+      position: sticky;
+      top: var(--announce-h);
+      z-index: 99;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .header-inner {
+      max-width: 1360px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .logo-svg {
+      width: 36px;
+      height: 36px;
+    }
+    .logo-text {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--brand);
+      letter-spacing: -0.5px;
+    }
+    .main-nav {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .main-nav a {
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: background 0.2s, color 0.2s;
+    }
+    .main-nav a:hover, .main-nav a:focus-visible {
+      background: var(--brand-light);
+      color: var(--brand);
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+
+    /* ========== 布局：三栏门户 ========== */
+    .page-container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .portal-grid {
+      display: grid;
+      grid-template-columns: 180px 1fr 260px;
+      gap: 24px;
+      padding: 24px 0 48px;
+    }
+
+    /* ========== 左频道索引 ========== */
+    .channel-index {
+      position: sticky;
+      top: calc(var(--announce-h) + var(--header-h) + 24px);
+      align-self: start;
+    }
+    .channel-index h3 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .channel-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .channel-list a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: background 0.15s, color 0.15s;
+    }
+    .channel-list a:hover, .channel-list a:focus-visible {
+      background: var(--brand-light);
+      color: var(--brand);
+      outline: 2px solid var(--brand);
+      outline-offset: 1px;
+    }
+    .channel-list .ch-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--brand);
+      flex-shrink: 0;
+    }
+
+    /* ========== 主内容区 ========== */
+    .main-content {
+      min-width: 0;
+    }
+
+    /* ========== 右辅助栏 ========== */
+    .sidebar {
+      align-self: start;
+    }
+    .sidebar-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .sidebar-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--brand-dark);
+    }
+    .hot-list {
+      list-style: none;
+      counter-reset: hot;
+    }
+    .hot-list li {
+      counter-increment: hot;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px dashed var(--border);
+      font-size: 13.5px;
+    }
+    .hot-list li:last-child { border-bottom: none; }
+    .hot-list li::before {
+      content: counter(hot);
+      font-weight: 700;
+      color: var(--brand);
+      font-size: 12px;
+      min-width: 18px;
+    }
+    .hot-list .hot-title {
+      flex: 1;
+    }
+    .hot-list .hot-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* ========== 首屏 ========== */
+    .hero {
+      background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 60%, #e74c3c 100%);
+      border-radius: var(--radius-lg);
+      padding: 44px 36px;
+      color: #fff;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: -40px;
+      top: -40px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .hero-desc {
+      font-size: 16px;
+      line-height: 1.75;
+      max-width: 640px;
+      opacity: 0.92;
+      margin-bottom: 24px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .hero-actions a {
+      display: inline-block;
+      padding: 10px 24px;
+      border-radius: 24px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #1e1e1e;
+    }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn-outline {
+      border: 1.5px solid rgba(255,255,255,0.6);
+      color: #fff;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.15); }
+
+    /* ========== 通用板块 ========== */
+    .section {
+      margin-bottom: 36px;
+    }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .section-header h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+    .section-header h2 .h2-accent {
+      color: var(--brand);
+    }
+    .section-sub {
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    /* 领域概览 */
+    .overview-text {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px 28px;
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--text-secondary);
+      box-shadow: var(--shadow-sm);
+    }
+    .overview-text p { margin-bottom: 12px; }
+    .overview-text p:last-child { margin-bottom: 0; }
+
+    /* 精选卡片 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      background: var(--brand-light);
+    }
+    .card-body {
+      padding: 14px 16px 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .card-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: var(--brand-light);
+      color: var(--brand-dark);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .tag-accent {
+      background: #fef9e7;
+      color: var(--accent-dark);
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 10px;
+    }
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 8px;
+    }
+    .card-meta .rating {
+      color: var(--brand);
+      font-weight: 700;
+    }
+
+    /* 最新更新列表 */
+    .update-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .update-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .update-item:last-child { border-bottom: none; }
+    .update-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--brand);
+      color: #fff;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .update-name {
+      font-weight: 600;
+      min-width: 140px;
+    }
+    .update-note {
+      color: var(--text-secondary);
+      font-size: 13px;
+      flex: 1;
+    }
+    .update-time {
+      font-size: 12px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* 分类入口 */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .category-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px 14px;
+      text-align: center;
+      transition: background 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+    .category-card:hover {
+      background: var(--brand-light);
+      border-color: var(--brand);
+    }
+    .category-icon {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+    .category-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .category-count {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* 深度解析 */
+    .deep-dive {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px 32px;
+      box-shadow: var(--shadow-sm);
+    }
+    .deep-dive h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--brand-dark);
+      margin: 20px 0 10px;
+    }
+    .deep-dive h3:first-child { margin-top: 0; }
+    .deep-dive p {
+      font-size: 14.5px;
+      line-height: 1.85;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+    .deep-dive ul {
+      margin: 8px 0 16px 20px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+    .deep-dive li { margin-bottom: 4px; }
+
+    /* 体验指南 */
+    .guide-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .guide-step {
+      display: flex;
+      gap: 18px;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+    }
+    .guide-step:last-child { border-bottom: none; }
+    .step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 800;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-content h4 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .step-content p {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+    .faq-item summary {
+      padding: 14px 18px;
+      font-weight: 600;
+      font-size: 14.5px;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::before {
+      content: '+';
+      font-weight: 700;
+      color: var(--brand);
+      font-size: 18px;
+      width: 20px;
+      flex-shrink: 0;
+    }
+    .faq-item[open] summary::before { content: '−'; }
+    .faq-item summary:hover { background: var(--brand-light); }
+    .faq-item .faq-answer {
+      padding: 0 18px 16px 46px;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    /* 用户评论 */
+    .comment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .comment-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .comment-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .comment-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--brand-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--brand);
+      flex-shrink: 0;
+    }
+    .comment-nick {
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .comment-date {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+    .comment-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* 相关资讯 */
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .news-item {
+      display: flex;
+      gap: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      box-shadow: var(--shadow-sm);
+      align-items: flex-start;
+    }
+    .news-date {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--brand);
+      white-space: nowrap;
+      min-width: 70px;
+      padding-top: 2px;
+    }
+    .news-body h4 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .news-body p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* 相关推荐标签 */
+    .related-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .related-tag {
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .related-tag:hover {
+      background: var(--brand-light);
+      color: var(--brand);
+      border-color: var(--brand);
+    }
+
+    /* 热门榜单 */
+    .ranking-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .ranking-table th {
+      background: var(--brand-light);
+      color: var(--brand-dark);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 14px;
+      text-align: left;
+    }
+    .ranking-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13.5px;
+    }
+    .ranking-table tr:last-child td { border-bottom: none; }
+    .ranking-table .rank-num {
+      font-weight: 800;
+      color: var(--brand);
+    }
+
+    /* 页尾 */
+    .site-footer {
+      background: #1e1e1e;
+      color: #c0c0c0;
+      padding: 40px 20px 24px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+    .footer-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 32px;
+    }
+    .footer-brand {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .footer-desc {
+      font-size: 12.5px;
+      color: #999;
+      max-width: 300px;
+    }
+    .footer-col h4 {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .footer-col a {
+      display: block;
+      color: #999;
+      font-size: 12.5px;
+      padding: 3px 0;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      max-width: 1360px;
+      margin: 28px auto 0;
+      padding-top: 16px;
+      border-top: 1px solid #333;
+      font-size: 12px;
+      color: #666;
+      text-align: center;
+    }
+
+    /* ========== 响应式 ========== */
+    @media (max-width: 1024px) {
+      .portal-grid {
+        grid-template-columns: 1fr 260px;
+        gap: 20px;
+      }
+      .channel-index {
+        display: none;
+      }
+      .hero h1 { font-size: 30px; }
+      .category-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (max-width: 740px) {
+      .portal-grid {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        order: 2;
+        margin-top: 8px;
+      }
+      .main-content { order: 1; }
+      .hero { padding: 28px 20px; border-radius: var(--radius-md); }
+      .hero h1 { font-size: 26px; }
+      .hero-desc { font-size: 14px; }
+      .card-grid { grid-template-columns: 1fr; }
+      .category-grid { grid-template-columns: repeat(2, 1fr); }
+      .comment-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .header-inner { gap: 12px; }
+      .main-nav { gap: 2px; }
+      .main-nav a { padding: 4px 8px; font-size: 12.5px; }
+      .logo-text { font-size: 18px; }
+      .update-item { flex-wrap: wrap; gap: 6px; }
+      .update-name { min-width: auto; }
+      .deep-dive { padding: 20px; }
+      .section-header h2 { font-size: 19px; }
+      .news-item { flex-direction: column; gap: 6px; }
+    }
+    @media (max-width: 420px) {
+      .footer-inner { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions a { text-align: center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .announce-bar span { animation: none; }
+      * { transition: none !important; }
+    }
+  </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+  <!-- 吸顶公告条 -->
+  <div class="announce-bar" role="status">
+    <span>本周新增 12 部短剧 · 11 月 8 日更新《闪婚老公是豪门》第 18 集 · 动漫专区《仙逆》第 45 集上线 · 电影《热辣滚烫》免费版可看</span>
+  </div>
+
+  <!-- 吸顶页头 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/#hero" class="logo-area" aria-label="糖心免费版首页">
+        <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="100" height="100" rx="22" fill="#c0392b"/>
+          <path d="M30 50 L72 28 L72 72 Z" fill="#f1c40f"/>
+          <circle cx="72" cy="50" r="8" fill="#fff" opacity="0.9"/>
+        </svg>
+        <span class="logo-text">糖心免费版</span>
+      </a>
+      <nav class="main-nav" aria-label="主题导航">
+        <a href="/#overview">领域概览</a>
+        <a href="/#featured">精选推荐</a>
+        <a href="/#updates">最新更新</a>
+        <a href="/#categories">分类入口</a>
+        <a href="/#deep-dive">深度解析</a>
+        <a href="/#faq">常见问题</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="portal-grid">
+
+      <!-- 左频道索引 -->
+      <aside class="channel-index" aria-label="频道索引">
+        <h3>频道索引</h3>
+        <ul class="channel-list">
+          <li><a href="/#overview"><span class="ch-dot"></span>领域概览</a></li>
+          <li><a href="/#featured"><span class="ch-dot"></span>精选推荐</a></li>
+          <li><a href="/#updates"><span class="ch-dot"></span>最新更新</a></li>
+          <li><a href="/#categories"><span class="ch-dot"></span>分类入口</a></li>
+          <li><a href="/#deep-dive"><span class="ch-dot"></span>深度解析</a></li>
+          <li><a href="/#guide"><span class="ch-dot"></span>体验指南</a></li>
+          <li><a href="/#faq"><span class="ch-dot"></span>常见问题</a></li>
+          <li><a href="/#comments"><span class="ch-dot"></span>用户评论</a></li>
+          <li><a href="/#news"><span class="ch-dot"></span>相关资讯</a></li>
+          <li><a href="/#related"><span class="ch-dot"></span>相关推荐</a></li>
+          <li><a href="/#ranking"><span class="ch-dot"></span>热门榜单</a></li>
+        </ul>
+      </aside>
+
+      <!-- 主内容区 -->
+      <main class="main-content">
+
+        <!-- 首屏 -->
+        <section id="hero" class="hero">
+          <h1>糖心免费版</h1>
+          <p class="hero-desc">汇聚短剧、电影、动漫、综艺等免费影视内容，提供分类导航、精选推荐、最新更新与深度解析，适合喜欢找片看剧的观众浏览。</p>
+          <div class="hero-actions">
+            <a href="/#featured" class="btn-primary">浏览精选内容</a>
+            <a href="/#updates" class="btn-outline">查看最新更新</a>
+          </div>
+        </section>
+
+        <!-- 1. 主题领域概览 -->
+        <section id="overview" class="section">
+          <div class="section-header">
+            <h2>短剧与免费影视<span class="h2-accent">领域概览</span></h2>
+            <span class="section-sub">当前热门方向与内容类型</span>
+          </div>
+          <div class="overview-text">
+            <p>糖心免费版所覆盖的免费影视内容，大致可以分为几类：竖屏短剧（每集 1—3 分钟，节奏快、反转多）、横屏网络电影（时长 60—90 分钟，题材以喜剧、动作、悬疑为主）、动漫番剧（日番与国创，每周固定更新）、以及综艺和纪录片。短剧的典型代表如《闪婚老公是豪门》《重生之我在霸总身边当保姆》，靠强情节钩子吸引观众；网络电影如《东北告别天团》《穷兄富弟》走喜剧路线，适合放松观看。</p>
+            <p>动漫方面，国创《仙逆》《凡人修仙传》保持周更，日番《葬送的芙莉莲》《药屋少女的呢喃》口碑稳定。综艺类《奔跑吧》《极限挑战》免费版通常延迟一周上线。这些内容在糖心免费版中以分类和标签形式组织，观众可以根据类型、更新时间、热度快速定位。当前值得关注的趋势是短剧精品化，一批制作水准接近传统剧集的短剧开始出现，比如《我在八零年代当后妈》用年代细节和情感线打动了更多观众。</p>
+          </div>
+        </section>
+
+        <!-- 2. 精选内容推荐 -->
+        <section id="featured" class="section">
+          <div class="section-header">
+            <h2>精选<span class="h2-accent">内容推荐</span></h2>
+            <span class="section-sub">基于近期热度与口碑</span>
+          </div>
+          <div class="card-grid">
+            <article class="card">
+              <img class="card-img" src="https://picsum.photos/seed/tangxin-shanhun01/400/300" alt="闪婚老公是豪门短剧封面" width="400" height="300" loading="lazy">
+              <div class="card-body">
+                <div class="card-title">闪婚老公是豪门</div>
+                <div class="card-tags"><span class="tag">短剧</span><span class="tag">甜宠</span><span class="tag tag-accent">热度 9876</span></div>
+                <p class="card-desc">女主为救家族企业与陌生人闪婚，婚后发现丈夫竟是隐藏首富。契约婚姻变真爱的经典套路，节奏紧凑，反转密集，适合喜欢甜爽短剧的观众。</p>
+                <div class="card-meta"><span>已更新 18 集</span><span class="rating">8.7 分</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <img class="card-img" src="https://picsum.photos/seed/tangxin-xianni02/400/300" alt="仙逆动漫封面" width="400" height="300" loading="lazy">
+              <div class="card-body">
+                <div class="card-title">仙逆</div>
+                <div class="card-tags"><span class="tag">动漫</span><span class="tag">修仙</span><span class="tag tag-accent">热度 8520</span></div>
+                <p class="card-desc">改编自耳根同名小说的年番动画，王林以凡人之躯逆天修行，画风写实，打斗场面流畅。最新第 45 集进入古神之地篇章，剧情进入高潮。</p>
+                <div class="card-meta"><span>每周一 10:00 更新</span><span class="rating">9.1 分</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <img class="card-img" src="https://picsum.photos/seed/tangxin-rela03/400/300" alt="热辣滚烫电影剧照" width="400" height="300" loading="lazy">
+              <div class="card-body">
+                <div class="card-title">热辣滚烫</div>
+                <div class="card-tags"><span class="tag">电影</span><span class="tag">励志</span><span class="tag tag-accent">热度 9100</span></div>
+                <p class="card-desc">贾玲执导并主演的励志喜剧，讲述宅家多年的乐莹通过拳击改变人生的故事。减肥与自我救赎的主题引发广泛讨论，免费版已上线。</p>
+                <div class="card-meta"><span>片长 129 分钟</span><span class="rating">8.5 分</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <img class="card-img" src="https://picsum.photos/seed/tangxin-baling04/400/300" alt="我在八零年代当后妈短剧封面" width="400" height="300" loading="lazy">
+              <div class="card-body">
+                <div class="card-title">我在八零年代当后妈</div>
+                <div class="card-tags"><span class="tag">短剧</span><span class="tag">年代</span><span class="tag tag-accent">热度 9230</span></div>
+                <p class="card-desc">现代女孩穿越回 1980 年代，成为两个孩子的后妈，用现代思维经营家庭与事业。年代细节还原到位，情感线温暖真实，短剧中的口碑之作。</p>
+                <div class="card-meta"><span>全 80 集</span><span class="rating">8.9 分</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <img class="card-img" src="https://picsum.photos/seed/tangxin-furui05/400/300" alt="葬送的芙莉莲动漫封面" width="400" height="300" loading="lazy">
+              <div class="card-body">
+                <div class="card-title">葬送的芙莉莲</div>
+                <div class="card-tags"><span class="tag">动漫</span><span class="tag">奇幻</span><span class="tag tag-accent">热度 8800</span></div>
+                <p class="card-desc">精灵魔法使芙莉莲在勇者死后踏上旅途，重新理解人类情感。治愈系叙事搭配精良制作，被观众称为“后日谈神作”。</p>
+                <div class="card-meta"><span>全 28 集</span><span class="rating">9.3 分</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <img class="card-img" src="https://picsum.photos/seed/tangxin-dongbei06/400/300" alt="东北告别天团电影海报" width="400" height="300" loading="lazy">
+              <div class="card-body">
+                <div class="card-title">东北告别天团</div>
+                <div class="card-tags"><span class="tag">电影</span><span class="tag">喜剧</span><span class="tag tag-accent">热度 7650</span></div>
+                <p class="card-desc">崔志佳自导自演的东北喜剧，讲述殡葬行业小人物的笑泪故事。范伟、张百乔等加盟，笑点密集且不低俗，适合合家欢观看。</p>
+                <div class="card-meta"><span>片长 95 分钟</span><span class="rating">8.2 分</span></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 3. 最新更新 -->
+        <section id="updates" class="section">
+          <div class="section-header">
+            <h2>最新<span class="h2-accent">更新动态</span></h2>
+            <span class="section-sub">截至 2026 年 11 月 8 日</span>
+          </div>
+          <div class="update-list">
+            <div class="update-item">
+              <span class="update-badge">新集</span>
+              <span class="update-name">闪婚老公是豪门</span>
+              <span class="update-note">第 18 集上线，女主身份即将揭晓</span>
+              <span class="update-time">今天 09:30</span>
+            </div>
+            <div class="update-item">
+              <span class="update-badge">新集</span>
+              <span class="update-name">仙逆</span>
+              <span class="update-note">第 45 集更新，王林进入古神之地</span>
+              <span class="update-time">今天 10:00</span>
+            </div>
+            <div class="update-item">
+              <span class="update-badge">上线</span>
+              <span class="update-name">热辣滚烫</span>
+              <span class="update-note">免费版正式上线，全片可看</span>
+              <span class="update-time">昨天 20:00</span>
+            </div>
+            <div class="update-item">
+              <span class="update-badge">新集</span>
+              <span class="update-name">我在八零年代当后妈</span>
+              <span class="update-note">第 72—80 集大结局一次性放出</span>
+              <span class="update-time">11 月 6 日</span>
+            </div>
+            <div class="update-item">
+              <span class="update-badge">定档</span>
+              <span class="update-name">重生之我在霸总身边当保姆</span>
+              <span class="update-note">定档 11 月 12 日，首更 10 集</span>
+              <span class="update-time">11 月 5 日</span>
+            </div>
+            <div class="update-item">
+              <span class="update-badge">新集</span>
+              <span class="update-name">葬送的芙莉莲</span>
+              <span class="update-note">第 28 集（最终话）已更新</span>
+              <span class="update-time">11 月 4 日</span>
+            </div>
+            <div class="update-item">
+              <span class="update-badge">上线</span>
+              <span class="update-name">东北告别天团</span>
+              <span class="update-note">限时免费观看，截止 11 月 15 日</span>
+              <span class="update-time">11 月 3 日</span>
+            </div>
+            <div class="update-item">
+              <span class="update-badge">新集</span>
+              <span class="update-name">凡人修仙传</span>
+              <span class="update-note">第 132 集更新，韩立结丹成功</span>
+              <span class="update-time">11 月 2 日</span>
+            </div>
+            <div class="update-item">
+              <span class="update-badge">专题</span>
+              <span class="update-name">短剧推荐专题</span>
+              <span class="update-note">“契约婚姻”题材合集上线，收录 8 部</span>
+              <span class="update-time">11 月 1 日</span>
+            </div>
+            <div class="update-item">
+              <span class="update-badge">新集</span>
+              <span class="update-name">药屋少女的呢喃</span>
+              <span class="update-note">第 36 集更新，猫猫身世线索推进</span>
+              <span class="update-time">10 月 31 日</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. 分类入口 -->
+        <section id="categories" class="section">
+          <div class="section-header">
+            <h2>分类<span class="h2-accent">入口</span></h2>
+            <span class="section-sub">按类型快速查找</span>
+          </div>
+          <div class="category-grid">
+            <div class="category-card">
+              <div class="category-icon">📱</div>
+              <div class="category-name">竖屏短剧</div>
+              <div class="category-count">326 部</div>
+            </div>
+            <div class="category-card">
+              <div class="category-icon">🎬</div>
+              <div class="category-name">网络电影</div>
+              <div class="category-count">184 部</div>
+            </div>
+            <div class="category-card">
+              <div class="category-icon">📺</div>
+              <div class="category-name">动漫番剧</div>
+              <div class="category-count">97 部</div>
+            </div>
+            <div class="category-card">
+              <div class="category-icon">🎭</div>
+              <div class="category-name">综艺</div>
+              <div class="category-count">56 部</div>
+            </div>
+            <div class="category-card">
+              <div class="category-icon">💕</div>
+              <div class="category-name">甜宠爱情</div>
+              <div class="category-count">128 部</div>
+            </div>
+            <div class="category-card">
+              <div class="category-icon">⚔️</div>
+              <div class="category-name">玄幻修仙</div>
+              <div class="category-count">72 部</div>
+            </div>
+            <div class="category-card">
+              <div class="category-icon">🤣</div>
+              <div class="category-name">喜剧搞笑</div>
+              <div class="category-count">143 部</div>
+            </div>
+            <div class="category-card">
+              <div class="category-icon">🔍</div>
+              <div class="category-name">悬疑推理</div>
+              <div class="category-count">68 部</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. 深度解析 -->
+        <section id="deep-dive" class="section">
+          <div class="section-header">
+            <h2>深度<span class="h2-accent">解析</span></h2>
+            <span class="section-sub">短剧与免费影视的类型差异与评判维度</span>
+          </div>
+          <div class="deep-dive">
+            <h3>竖屏短剧与传统剧集的核心区别</h3>
+            <p>竖屏短剧单集时长通常在 1—3 分钟，一部作品总集数在 60—100 集之间，整体观看时长约等于一部电影。它的叙事逻辑围绕“每 30 秒一个钩子”设计，开场即冲突，每集结尾留悬念。传统剧集则允许更长的铺垫和人物弧光。判断一部短剧是否值得投入时间，可以看三个维度：前 3 集能否建立清晰的核心矛盾、主角人设是否有辨识度、反转是否依赖逻辑而非巧合。以《闪婚老公是豪门》为例，它在前两集就完成了“闪婚—身份错位—契约建立”的完整钩子链，属于短剧中的标准优等生。</p>
+
+            <h3>网络电影的题材分布与选择策略</h3>
+            <p>免费网络电影以喜剧、动作、悬疑三大类为主。喜剧片如《东北告别天团》依赖东北方言文化和演员即兴发挥；动作片多集中在警匪和军事题材；悬疑片则常走“小成本高概念”路线。选择时可以先看片长——75—95 分钟的作品通常节奏更紧凑，超过 110 分钟的网络电影容易注水。其次看主演阵容，范伟、崔志佳、张百乔等演员出现的作品，喜剧完成度相对有保障。最后看上线时间，免费版新上线的电影一般有 7—14 天的推荐窗口。</p>
+
+            <h3>动漫番剧的更新节奏与追番判断</h3>
+            <p>国创年番如《仙逆》《凡人修仙传》保持每周一更，单集 20—25 分钟，适合长期追看。日番通常分季播出，一季 12—24 集，完结后口碑稳定再补看效率更高。判断一部动漫是否适合自己，先看类型标签：修仙、奇幻、日常、悬疑各有固定受众。其次看制作公司，玄机科技、若森数字的国创作品在画面精度上有基本盘。最后看社区讨论焦点，比如《葬送的芙莉莲》被讨论最多的是“后日谈叙事”和“情感留白”，如果你喜欢慢节奏治愈系，它会是很好的选择；如果偏好强冲突，则可能觉得平淡。</p>
+
+            <h3>免费影视内容的时效性与窗口期</h3>
+            <p>免费版内容通常有窗口期限制。院线电影上线免费版一般在影院下映后 3—6 个月；网络电影上线即免费的情况较少，更多是限时免费 7—15 天。短剧的免费周期相对宽松，多数作品全集免费。动漫番剧的免费集数通常为前 6—12 集，后续需要会员，但部分平台会在完结后开放全免。观众在糖心免费版中浏览时，可以关注条目页标注的“免费截止日期”，避免看到一半发现需要付费。以《东北告别天团》为例，本次限免截止 11 月 15 日，属于典型的短期推广窗口。</p>
+          </div>
+        </section>
+
+        <!-- 6. 体验指南 -->
+        <section id="guide" class="section">
+          <div class="section-header">
+            <h2>观看<span class="h2-accent">体验指南</span></h2>
+            <span class="section-sub">从哪开始、怎么判断、如何比较</span>
+          </div>
+          <div class="guide-steps">
+            <div class="guide-step">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <h4>先确定观看场景</h4>
+                <p>通勤、午休等碎片时间适合竖屏短剧，单集 2 分钟随时可停；整块时间（90 分钟以上）更适合网络电影或动漫连看。如果只想放松不费脑，优先选喜剧类；如果想被剧情抓住，选悬疑或强反转短剧。</p>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <h4>用前 3 集做判断</h4>
+                <p>短剧看前 3 集是否建立核心冲突；电影看前 15 分钟是否给出明确的类型信号；动漫看第 1 集是否交代清楚世界观和主角目标。如果前 3 集/15 分钟没有抓住你，换一部的成本远低于硬撑。</p>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <h4>比较同类型条目的三个指标</h4>
+                <p>热度值反映近期观看量，评分反映看完的观众满意度，更新进度决定你是能一口气看完还是需要等待。三者结合看：热度高但评分低于 7 分的，可能是营销驱动；评分高但热度低的，可能是小众精品。</p>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="step-num">4</div>
+              <div class="step-content">
+                <h4>注意免费窗口与集数限制</h4>
+                <p>浏览条目时先确认“免费范围”——是全集免费、前 N 集免费、还是限时免费。限时免费的条目建议优先安排观看时间，比如《东北告别天团》截止 11 月 15 日，可以排进本周片单。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. FAQ -->
+        <section id="faq" class="section">
+          <div class="section-header">
+            <h2>常见<span class="h2-accent">问题</span></h2>
+            <span class="section-sub">关于短剧与免费影视的常见疑问</span>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>短剧一般多久更新一次？</summary>
+              <div class="faq-answer">竖屏短剧的更新节奏差异较大。制作方通常一次性拍摄完毕，上线后集中更新，常见模式是每天更新 5—10 集，一周左右更新完毕；也有平台采用每周更新 10—15 集的周更模式。追更时可以关注条目页的更新日历标注。</div>
+            </details>
+            <details class="faq-item">
+              <summary>《闪婚老公是豪门》和《重生之我在霸总身边当保姆》有什么区别？</summary>
+              <div class="faq-answer">两部都是甜宠短剧，但切入点不同。《闪婚老公是豪门》走“契约婚姻+身份反转”路线，核心看点是女主逐步发现丈夫真实身份的过程；《重生之我在霸总身边当保姆》则叠加了重生设定，女主带着前世记忆重新选择人生，更侧重“逆袭”和“打脸”情节。喜欢纯甜选前者，喜欢爽感选后者。</div>
+            </details>
+            <details class="faq-item">
+              <summary>第一次接触免费影视，从哪个条目开始看比较好？</summary>
+              <div class="faq-answer">如果没看过竖屏短剧，建议从《我在八零年代当后妈》入手，它的年代感和情感线对传统剧集观众更友好，门槛较低。想看国创动漫可以从《仙逆》开始，前几集信息密度高，容易进入。电影方面《热辣滚烫》是安全选择，题材普适、完成度高。</div>
+            </details>
+            <details class="faq-item">
+              <summary>怎么判断一部短剧值不值得看？</summary>
+              <div class="faq-answer">三个信号：一是前 3 集能否让你产生“想知道后面发生了什么”的冲动；二是主角人设是否有具体的目标和障碍，而不是单纯靠台词堆砌；三是反转是否在前文有伏笔，完全靠巧合硬转的通常质量一般。另外可以看评分和评论中反复提到的关键词，如果多数评论在讨论剧情而非吐槽演技，说明基础质量过关。</div>
+            </details>
+            <details class="faq-item">
+              <summary>免费动漫和付费版的内容有区别吗？</summary>
+              <div class="faq-answer">内容本身没有区别，区别在于可观看的集数范围。免费版通常提供前 6—12 集或整季的限时免费，付费版解锁全部集数。部分国创年番在完结后会开放全免，可以等完结后再补。如果正在追更，免费版可能比付费版晚一周左右。</div>
+            </details>
+            <details class="faq-item">
+              <summary>网络电影和院线电影在观看体验上有什么不同？</summary>
+              <div class="faq-answer">网络电影制作成本通常低于院线电影，场景更集中、特效镜头更少，但节奏往往更快，前 6 分钟必须进入主线。题材上网络电影更偏向喜剧、动作、悬疑等强类型，院线电影类型更分散。免费版中的网络电影多数是已上线一段时间后的转免，画质和音效适合家庭观看。</div>
+            </details>
+          </div>
+        </section>
+
+        <!-- 8. 用户评论 -->
+        <section id="comments" class="section">
+          <div class="section-header">
+            <h2>用户<span class="h2-accent">评论</span></h2>
+            <span class="section-sub">来自观众的观看反馈</span>
+          </div>
+          <div class="comment-grid">
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">追</div>
+                <span class="comment-nick">追剧小能手</span>
+                <span class="comment-date">11 月 8 日</span>
+              </div>
+              <p class="comment-text">《闪婚老公是豪门》第 18 集终于要揭晓女主身份了，前面埋的伏笔基本都收回来了，编剧还算靠谱。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">仙</div>
+                <span class="comment-nick">仙逆老粉</span>
+                <span class="comment-date">11 月 8 日</span>
+              </div>
+              <p class="comment-text">仙逆第 45 集的打斗作画比前面几集好不少，古神之地这个篇章果然是大场面，值得追。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">八</div>
+                <span class="comment-nick">八零后妈上头</span>
+                <span class="comment-date">11 月 7 日</span>
+              </div>
+              <p class="comment-text">《我在八零年代当后妈》大结局看完了，结尾有点仓促，但整体在短剧里算很完整的了，年代感做得好。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">热</div>
+                <span class="comment-nick">热辣观众</span>
+                <span class="comment-date">11 月 7 日</span>
+              </div>
+              <p class="comment-text">《热辣滚烫》免费版上线了，之前在影院看过，这次陪家人二刷，拳击那段的情绪还是很顶。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">东</div>
+                <span class="comment-nick">东北喜剧粉</span>
+                <span class="comment-date">11 月 6 日</span>
+              </div>
+              <p class="comment-text">《东北告别天团》限免赶紧看，范伟出场那段笑死我了，这种东北喜剧真的对胃口。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">芙</div>
+                <span class="comment-nick">芙莉莲迷妹</span>
+                <span class="comment-date">11 月 6 日</span>
+              </div>
+              <p class="comment-text">葬送的芙莉莲完结了，最后一集哭死，这种淡淡的叙事后劲太大了，准备二刷。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">路</div>
+                <span class="comment-nick">路人甲</span>
+                <span class="comment-date">11 月 5 日</span>
+              </div>
+              <p class="comment-text">短剧看多了发现套路都差不多，最近有点审美疲劳，转去看网络电影了，至少每部故事不一样。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">凡</div>
+                <span class="comment-nick">凡人修仙传观众</span>
+                <span class="comment-date">11 月 5 日</span>
+              </div>
+              <p class="comment-text">凡人第 132 集韩立结丹，等了好久的剧情终于来了，这集节奏可以，没有拖。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">药</div>
+                <span class="comment-nick">药屋猫猫粉</span>
+                <span class="comment-date">11 月 4 日</span>
+              </div>
+              <p class="comment-text">药屋少女第 36 集信息量好大，猫猫的身世线终于开始收了，期待后续。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">新</div>
+                <span class="comment-nick">新剧观察员</span>
+                <span class="comment-date">11 月 4 日</span>
+              </div>
+              <p class="comment-text">《重生之我在霸总身边当保姆》定档 11 月 12 日，预告片看着质感不错，希望正片不拉胯。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">随</div>
+                <span class="comment-nick">随便看看</span>
+                <span class="comment-date">11 月 3 日</span>
+              </div>
+              <p class="comment-text">短剧的配音有时候太出戏了，画面还行，声音一出来就出戏，希望制作方重视一下。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">动</div>
+                <span class="comment-nick">动漫杂食党</span>
+                <span class="comment-date">11 月 3 日</span>
+              </div>
+              <p class="comment-text">国创动漫这几年进步真的大，仙逆和凡人的画面放几年前不敢想，希望多出一些这种质量的。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">喜</div>
+                <span class="comment-nick">喜剧爱好者</span>
+                <span class="comment-date">11 月 2 日</span>
+              </div>
+              <p class="comment-text">网络电影里的喜剧比想象中好，东北告别天团虽然是小成本，但笑点很自然，不尬。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">短</div>
+                <span class="comment-nick">短剧测评君</span>
+                <span class="comment-date">11 月 2 日</span>
+              </div>
+              <p class="comment-text">最近上的短剧质量参差不齐，有的前 3 集能看后面就水了，建议看之前先翻评论。</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. 相关资讯 -->
+        <section id="news" class="section">
+          <div class="section-header">
+            <h2>相关<span class="h2-accent">资讯</span></h2>
+            <span class="section-sub">近期动态与社区焦点</span>
+          </div>
+          <div class="news-list">
+            <div class="news-item">
+              <span class="news-date">11 月 8 日</span>
+              <div class="news-body">
+                <h4>《闪婚老公是豪门》登顶短剧热榜，单日播放破 2000 万</h4>
+                <p>该剧第 18 集上线后热度持续攀升，在多个短剧榜单中占据第一，“契约婚姻”题材再次成为讨论焦点。</p>
+              </div>
+            </div>
+            <div class="news-item">
+              <span class="news-date">11 月 7 日</span>
+              <div class="news-body">
+                <h4>《热辣滚烫》免费版上线首日观看量超预期</h4>
+                <p>影片在免费版上线 24 小时内进入电影热度前三，拳击训练片段被大量转发，带动励志题材关注度回升。</p>
+              </div>
+            </div>
+            <div class="news-item">
+              <span class="news-date">11 月 6 日</span>
+              <div class="news-body">
+                <h4>《我在八零年代当后妈》全集收官，年代短剧赛道升温</h4>
+                <p>该剧大结局放出后，平台内“年代短剧”搜索量环比上涨 45%，多部同类题材进入制作阶段。</p>
+              </div>
+            </div>
+            <div class="news-item">
+              <span class="news-date">11 月 5 日</span>
+              <div class="news-body">
+                <h4>《仙逆》古神之地篇章开启，国创年番竞争加剧</h4>
+                <p>第 45 集进入新篇章，同时《凡人修仙传》结丹剧情也在推进，国创修仙题材形成双强格局。</p>
+              </div>
+            </div>
+            <div class="news-item">
+              <span class="news-date">11 月 4 日</span>
+              <div class="news-body">
+                <h4>《葬送的芙莉莲》完结，治愈系动漫讨论度走高</h4>
+                <p>最终话播出后，“后日谈叙事”成为社区热词，多部同类风格作品被重新翻出讨论。</p>
+              </div>
+            </div>
+            <div class="news-item">
+              <span class="news-date">11 月 3 日</span>
+              <div class="news-body">
+                <h4>《东北告别天团》限免延长至 11 月 15 日</h4>
+                <p>平台宣布将限免窗口延长一周，以回应观众的观看需求，该片在喜剧类目下热度排名第二。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 10. 相关推荐 -->
+        <section id="related" class="section">
+          <div class="section-header">
+            <h2>相关<span class="h2-accent">推荐</span></h2>
+            <span class="section-sub">延伸方向与同类作品</span>
+          </div>
+          <div class="related-tags">
+            <a href="/#featured" class="related-tag">契约婚姻短剧合集</a>
+            <a href="/#featured" class="related-tag">国创修仙年番</a>
+            <a href="/#featured" class="related-tag">年代穿越短剧</a>
+            <a href="/#featured" class="related-tag">东北喜剧网络电影</a>
+            <a href="/#featured" class="related-tag">治愈系奇幻动漫</a>
+            <a href="/#featured" class="related-tag">限时免费电影</a>
+            <a href="/#featured" class="related-tag">甜宠逆袭短剧</a>
+            <a href="/#featured" class="related-tag">2026 年 11 月新上线</a>
+          </div>
+        </section>
+
+        <!-- 11. 补充板块：热门榜单 -->
+        <section id="ranking" class="section">
+          <div class="section-header">
+            <h2>热门<span class="h2-accent">榜单</span></h2>
+            <span class="section-sub">2026 年 11 月 8 日 · 综合热度排行</span>
+          </div>
+          <table class="ranking-table">
+            <thead>
+              <tr>
+                <th style="width:50px;">排名</th>
+                <th>条目名称</th>
+                <th>类型</th>
+                <th>热度</th>
+                <th>趋势</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="rank-num">1</td><td>闪婚老公是豪门</td><td>短剧</td><td>9876</td><td>↑ 2</td></tr>
+              <tr><td class="rank-num">2</td><td>我在八零年代当后妈</td><td>短剧</td><td>9230</td><td>—</td></tr>
+              <tr><td class="rank-num">3</td><td>热辣滚烫</td><td>电影</td><td>9100</td><td>↑ 5</td></tr>
+              <tr><td class="rank-num">4</td><td>葬送的芙莉莲</td><td>动漫</td><td>8800</td><td>↓ 1</td></tr>
+              <tr><td class="rank-num">5</td><td>仙逆</td><td>动漫</td><td>8520</td><td>↑ 1</td></tr>
+              <tr><td class="rank-num">6</td><td>东北告别天团</td><td>电影</td><td>7650</td><td>↑ 3</td></tr>
+              <tr><td class="rank-num">7</td><td>凡人修仙传</td><td>动漫</td><td>7420</td><td>↓ 2</td></tr>
+              <tr><td class="rank-num">8</td><td>药屋少女的呢喃</td><td>动漫</td><td>6890</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+      </main>
+
+      <!-- 右辅助栏 -->
+      <aside class="sidebar" aria-label="辅助信息">
+        <div class="sidebar-card">
+          <h3>🔥 今日热榜</h3>
+          <ol class="hot-list">
+            <li><span class="hot-title">闪婚老公是豪门</span><span class="hot-meta">9876</span></li>
+            <li><span class="hot-title">我在八零年代当后妈</span><span class="hot-meta">9230</span></li>
+            <li><span class="hot-title">热辣滚烫</span><span class="hot-meta">9100</span></li>
+            <li><span class="hot-title">葬送的芙莉莲</span><span class="hot-meta">8800</span></li>
+            <li><span class="hot-title">仙逆</span><span class="hot-meta">8520</span></li>
+            <li><span class="hot-title">东北告别天团</span><span class="hot-meta">7650</span></li>
+          </ol>
+        </div>
+        <div class="sidebar-card">
+          <h3>📅 近期更新日历</h3>
+          <ul class="hot-list" style="counter-reset:none;">
+            <li style="counter-increment:none; display:block; padding:6px 0;">11 月 8 日 · 闪婚老公是豪门 第 18 集</li>
+            <li style="counter-increment:none; display:block; padding:6px 0;">11 月 8 日 · 仙逆 第 45 集</li>
+            <li style="counter-increment:none; display:block; padding:6px 0;">11 月 12 日 · 重生之我在霸总身边当保姆 首更</li>
+            <li style="counter-increment:none; display:block; padding:6px 0;">11 月 15 日 · 东北告别天团 限免截止</li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <h3>🏷️ 热门标签</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <span class="tag">契约婚姻</span>
+            <span class="tag">年代穿越</span>
+            <span class="tag">修仙</span>
+            <span class="tag">甜宠</span>
+            <span class="tag">励志</span>
+            <span class="tag">治愈</span>
+            <span class="tag">喜剧</span>
+            <span class="tag">限时免费</span>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- 页尾 -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">糖心免费版</div>
+        <p class="footer-desc">汇聚短剧、电影、动漫等免费影视内容，提供分类导航、精选推荐、最新更新与深度解析，帮助观众快速找到想看的作品。</p>
+      </div>
+      <div class="footer-col">
+        <h4>内容频道</h4>
+        <a href="/#overview">领域概览</a>
+        <a href="/#featured">精选推荐</a>
+        <a href="/#updates">最新更新</a>
+        <a href="/#categories">分类入口</a>
+      </div>
+      <div class="footer-col">
+        <h4>深度与互动</h4>
+        <a href="/#deep-dive">深度解析</a>
+        <a href="/#guide">体验指南</a>
+        <a href="/#faq">常见问题</a>
+        <a href="/#comments">用户评论</a>
+      </div>
+      <div class="footer-col">
+        <h4>更多</h4>
+        <a href="/#news">相关资讯</a>
+        <a href="/#related">相关推荐</a>
+        <a href="/#ranking">热门榜单</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      部分内容为示例数据，仅用于展示页面结构 · © 2026 糖心免费版
+    </div>
+  </footer>
+
+  <script>
+    // 轻量交互：平滑锚点滚动（已通过 CSS scroll-padding-top 处理偏移）
+    document.querySelectorAll('a[href^="/#"]').forEach(function(anchor) {
+      anchor.addEventListener('click', function(e) {
+        var targetId = this.getAttribute('href').slice(2);
+        var target = document.getElementById(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+                </html>
