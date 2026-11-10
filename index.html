@@ -1,0 +1,1578 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>九九美剧 - 美剧聚合与追剧指南</title>
+  <meta name="description" content="九九美剧汇聚当前热门与经典美剧，提供新剧定档、分集更新、类型片单、深度解析与用户讨论。适合想快速找到下一部要追的剧、了解美剧播出节奏与制作背景的观众。">
+  <meta name="keywords" content="美剧片单, 分集更新, 新剧定档, 类型剧推荐, 追剧日历">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1e3c'/%3E%3Cpath d='M10 22V10l12 6-12 6z' fill='%23e5b567'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #f6f4f0;
+      --surface: #ffffff;
+      --surface-alt: #fbf9f6;
+      --ink: #1a1e3c;
+      --ink-soft: #4a4e6a;
+      --muted: #7a7e96;
+      --line: #e2ddd6;
+      --primary: #1a1e3c;
+      --accent: #b8860b;
+      --accent-soft: #f0e6d2;
+      --highlight: #c0392b;
+      --radius: 10px;
+      --radius-sm: 6px;
+      --shadow: 0 2px 12px rgba(26,30,60,0.07);
+      --font: -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --max-width: 1360px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; height: auto; }
+    ul { list-style: none; }
+    button { font-family: inherit; cursor: pointer; }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
+
+    /* 吸顶公告条 + 页头 */
+    .sticky-top {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .announcement {
+      background: var(--primary);
+      color: #f0e6d2;
+      font-size: 13px;
+      padding: 8px 0;
+      letter-spacing: 0.02em;
+    }
+    .announcement .container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .announcement .tag {
+      background: var(--accent);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .site-header {
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+      padding: 12px 0;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--primary);
+      letter-spacing: 0.02em;
+      flex-shrink: 0;
+    }
+    .brand svg { width: 34px; height: 34px; }
+    .main-nav {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .main-nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink-soft);
+      padding: 6px 12px;
+      border-radius: 20px;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+    .main-nav a:hover, .main-nav a:focus-visible {
+      background: var(--accent-soft);
+      color: var(--primary);
+      outline: none;
+    }
+    .header-actions {
+      margin-left: auto;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: var(--surface-alt);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 4px 6px 4px 14px;
+      gap: 4px;
+    }
+    .search-box input {
+      border: none;
+      background: transparent;
+      font-size: 13px;
+      width: 150px;
+      outline: none;
+      color: var(--ink);
+      font-family: inherit;
+    }
+    .search-box input::placeholder { color: var(--muted); }
+    .search-box button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 16px;
+      padding: 5px 14px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .search-feedback {
+      font-size: 12px;
+      color: var(--highlight);
+      padding: 0 8px;
+      display: none;
+    }
+
+    /* 首屏 */
+    .hero {
+      background: linear-gradient(135deg, #1a1e3c 0%, #2a2f5a 55%, #1a1e3c 100%);
+      color: #fff;
+      padding: 44px 0 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(229,181,103,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 44px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .hero h1 span {
+      display: inline-block;
+      border-bottom: 4px solid var(--accent);
+      padding-bottom: 2px;
+    }
+    .hero p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.82);
+      max-width: 520px;
+      margin-bottom: 24px;
+      line-height: 1.8;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 22px;
+      border-radius: 24px;
+      border: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--accent); color: var(--primary); }
+    .btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.35); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); }
+    .hero-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .hero-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: var(--radius);
+      padding: 16px;
+      backdrop-filter: blur(4px);
+    }
+    .hero-card .num {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .hero-card .label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      margin-top: 6px;
+    }
+    .hero-card .sub {
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 2px;
+    }
+
+    /* 主布局：三栏门户 */
+    .layout {
+      display: grid;
+      grid-template-columns: 180px 1fr 250px;
+      gap: 24px;
+      padding: 32px 0 48px;
+      align-items: start;
+    }
+
+    /* 左频道索引 */
+    .channel-index {
+      position: sticky;
+      top: 120px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px 0;
+      border: 1px solid var(--line);
+    }
+    .channel-index h2 {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      padding: 0 18px 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 8px;
+    }
+    .channel-index ul li a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      border-left: 3px solid transparent;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .channel-index ul li a:hover,
+    .channel-index ul li a:focus-visible {
+      background: var(--accent-soft);
+      border-left-color: var(--accent);
+      color: var(--primary);
+      outline: none;
+    }
+    .channel-index ul li a .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* 主内容 */
+    .main-content { min-width: 0; display: flex; flex-direction: column; gap: 36px; }
+
+    section { scroll-margin-top: 110px; }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .section-head h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 0.01em;
+    }
+    .section-head h2 .accent-line {
+      display: inline-block;
+      width: 22px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+    .section-head .more {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .section-head .more:hover { text-decoration: underline; }
+
+    /* 领域概览 */
+    .overview-box {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px 28px;
+      box-shadow: var(--shadow);
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      line-height: 1.85;
+    }
+    .overview-box p + p { margin-top: 12px; }
+    .overview-box strong { color: var(--primary); font-weight: 700; }
+
+    /* 精选卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 18px;
+    }
+    .series-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.18s, box-shadow 0.18s;
+    }
+    .series-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(26,30,60,0.12);
+    }
+    .series-card .cover {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--surface-alt);
+    }
+    .series-card .cover img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .series-card .cover .badge {
+      position: absolute;
+      top: 10px; left: 10px;
+      background: var(--primary);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 12px;
+      letter-spacing: 0.02em;
+    }
+    .series-card .card-body { padding: 14px 16px 16px; flex: 1; display: flex; flex-direction: column; }
+    .series-card h3 {
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+    .series-card .meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .series-card .meta span {
+      font-size: 11px;
+      color: var(--muted);
+      background: var(--surface-alt);
+      padding: 2px 8px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+    }
+    .series-card .desc {
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      margin-bottom: 10px;
+      flex: 1;
+    }
+    .series-card .stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px dashed var(--line);
+      padding-top: 8px;
+    }
+    .series-card .stats .score { color: var(--accent); font-weight: 700; }
+
+    /* 最新更新列表 */
+    .update-list {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .update-item {
+      display: flex;
+      gap: 14px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--line);
+      align-items: flex-start;
+      transition: background 0.15s;
+    }
+    .update-item:last-child { border-bottom: none; }
+    .update-item:hover { background: var(--surface-alt); }
+    .update-item .time-tag {
+      font-size: 11px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 10px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .update-item .update-body { flex: 1; min-width: 0; }
+    .update-item .update-body .title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+    .update-item .update-body .summary {
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+    .update-item .ep {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* 分类入口 */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+    }
+    .category-item {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      transition: background 0.15s, border-color 0.15s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .category-item:hover,
+    .category-item:focus-visible {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      outline: none;
+    }
+    .category-item .count {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    /* 深度解析 */
+    .deep-dive {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px 32px;
+      box-shadow: var(--shadow);
+    }
+    .deep-dive h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 26px 0 10px;
+      padding-left: 12px;
+      border-left: 3px solid var(--accent);
+    }
+    .deep-dive h3:first-of-type { margin-top: 0; }
+    .deep-dive p {
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      line-height: 1.85;
+      margin-bottom: 12px;
+    }
+    .deep-dive ul {
+      margin: 8px 0 14px 18px;
+      list-style: disc;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .deep-dive ul li { margin-bottom: 4px; }
+
+    /* 体验指南 - 编号步骤 */
+    .guide-steps {
+      counter-reset: step;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .guide-step {
+      display: flex;
+      gap: 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      box-shadow: var(--shadow);
+      align-items: flex-start;
+    }
+    .guide-step::before {
+      counter-increment: step;
+      content: counter(step);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--accent);
+      background: var(--accent-soft);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .guide-step .gs-body h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .guide-step .gs-body p {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: 10px; }
+    details {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    details summary {
+      padding: 15px 20px;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--primary);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.15s;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::before {
+      content: "+";
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      width: 20px;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    details[open] summary::before { content: "−"; }
+    details summary:hover { background: var(--surface-alt); }
+    details summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+    details .faq-answer {
+      padding: 0 20px 18px 50px;
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      line-height: 1.8;
+    }
+
+    /* 用户评论 */
+    .comment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+    }
+    .comment-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+    .comment-card .user {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .comment-card .avatar {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .comment-card .nickname { font-weight: 700; color: var(--primary); font-size: 13px; }
+    .comment-card .msg { font-size: 13px; }
+
+    /* 相关资讯 */
+    .news-list { display: flex; flex-direction: column; gap: 12px; }
+    .news-item {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .news-item .news-date {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+      padding-top: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+    .news-item .news-body h4 {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 3px;
+    }
+    .news-item .news-body p { font-size: 13px; color: var(--ink-soft); }
+
+    /* 相关推荐 */
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tag-cloud a {
+      font-size: 13px;
+      padding: 7px 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      color: var(--ink-soft);
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .tag-cloud a:hover,
+    .tag-cloud a:focus-visible {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--primary);
+      outline: none;
+    }
+
+    /* 补充板块 - 榜单 */
+    .ranking-list {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .rank-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+    .rank-item:last-child { border-bottom: none; }
+    .rank-item .rank-num {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--muted);
+      width: 28px;
+      text-align: center;
+      flex-shrink: 0;
+      font-variant-numeric: tabular-nums;
+    }
+    .rank-item:nth-child(1) .rank-num,
+    .rank-item:nth-child(2) .rank-num,
+    .rank-item:nth-child(3) .rank-num { color: var(--accent); }
+    .rank-item .rank-name { font-weight: 600; color: var(--primary); flex: 1; min-width: 0; }
+    .rank-item .rank-tag { font-size: 11px; color: var(--muted); background: var(--surface-alt); padding: 2px 8px; border-radius: 10px; border: 1px solid var(--line); white-space: nowrap; }
+    .rank-item .rank-score { font-size: 13px; color: var(--accent); font-weight: 700; white-space: nowrap; }
+
+    /* 右侧辅助栏 */
+    .sidebar {
+      position: sticky;
+      top: 120px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .side-box {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px 18px 16px;
+    }
+    .side-box h3 {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+    .side-box ul li {
+      font-size: 13px;
+      color: var(--ink-soft);
+      padding: 7px 0;
+      border-bottom: 1px dashed var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .side-box ul li:last-child { border-bottom: none; }
+    .side-box ul li .name { flex: 1; min-width: 0; }
+    .side-box ul li .val { color: var(--accent); font-weight: 600; white-space: nowrap; font-size: 12px; }
+    .side-box .hot-tag {
+      display: inline-block;
+      font-size: 10px;
+      background: var(--highlight);
+      color: #fff;
+      padding: 1px 6px;
+      border-radius: 8px;
+      margin-left: 4px;
+    }
+
+    /* 页尾 */
+    .site-footer {
+      background: var(--primary);
+      color: rgba(255,255,255,0.7);
+      padding: 44px 0 28px;
+      margin-top: 12px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 36px;
+      margin-bottom: 32px;
+    }
+    .footer-brand .brand { font-size: 20px; color: #fff; margin-bottom: 10px; }
+    .footer-brand p { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.55); max-width: 280px; }
+    .footer-col h4 {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      transition: color 0.15s;
+    }
+    .footer-col ul li a:hover { color: var(--accent); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 20px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* 搜索无结果 */
+    .no-result {
+      display: none;
+      background: var(--surface);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* 响应式 */
+    @media (max-width: 1024px) {
+      .layout {
+        grid-template-columns: 1fr 260px;
+      }
+      .channel-index { display: none; }
+      .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 740px) {
+      .layout { grid-template-columns: 1fr; gap: 32px; }
+      .sidebar { position: static; }
+      .main-nav { display: none; }
+      .header-inner { gap: 12px; }
+      .search-box input { width: 100px; }
+      .hero { padding: 32px 0 28px; }
+      .hero-visual { grid-template-columns: 1fr 1fr; }
+      .card-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+      .comment-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .announcement .container { font-size: 12px; }
+      .deep-dive { padding: 22px 18px; }
+      .hero h1 { font-size: 28px; }
+    }
+    @media (max-width: 420px) {
+      .hero-visual { grid-template-columns: 1fr; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+  <!-- 吸顶公告条 + 页头 -->
+  <div class="sticky-top">
+    <div class="announcement" role="region" aria-label="更新公告">
+      <div class="container">
+        <span class="tag">今日更新</span>
+        <span>11 月 8 日新增 5 部剧集分集：<strong>《怪奇物语》第五季</strong> 第 3 集、《白莲花度假村》第三季 第 6 集、《流人》第四季 第 8 集已上线</span>
+      </div>
+    </div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="/#top" class="brand" aria-label="九九美剧首页">
+          <svg viewBox="0 0 34 34" fill="none" aria-hidden="true">
+            <rect width="34" height="34" rx="8" fill="#1a1e3c"/>
+            <path d="M11 24V10l13 7-13 7z" fill="#e5b567"/>
+            <circle cx="26" cy="24" r="2.5" fill="#b8860b"/>
+          </svg>
+          九九美剧
+        </a>
+        <nav class="main-nav" aria-label="主题导航">
+          <a href="/#overview">美剧概览</a>
+          <a href="/#picks">精选剧集</a>
+          <a href="/#updates">分集更新</a>
+          <a href="/#categories">类型频道</a>
+          <a href="/#deep-dive">深度解析</a>
+          <a href="/#faq">常见问题</a>
+        </nav>
+        <div class="header-actions">
+          <div class="search-box" role="search">
+            <input type="search" id="siteSearch" placeholder="搜索剧名、类型…" aria-label="搜索剧集">
+            <button type="button" id="searchBtn">查找</button>
+          </div>
+          <span class="search-feedback" id="searchFeedback"></span>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <main id="top">
+    <!-- 首屏 -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div>
+          <h1 id="hero-title"><span>九九美剧</span></h1>
+          <p>汇聚当前热播与经典美剧的播出信息、分集更新、类型片单和制作背景解读。从公共电视网到流媒体平台，帮你理清每部剧的看点、更新节奏和入坑门槛。</p>
+          <div class="hero-actions">
+            <a href="/#picks" class="btn btn-primary">浏览精选剧集</a>
+            <a href="/#updates" class="btn btn-ghost">查看今日更新</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-card">
+            <div class="num">38</div>
+            <div class="label">本周在更剧集</div>
+            <div class="sub">含 12 部新季首播</div>
+          </div>
+          <div class="hero-card">
+            <div class="num">6</div>
+            <div class="label">今日分集上线</div>
+            <div class="sub">11 月 8 日更新</div>
+          </div>
+          <div class="hero-card">
+            <div class="num">14</div>
+            <div class="label">类型频道</div>
+            <div class="sub">悬疑 / 剧情 / 科幻等</div>
+          </div>
+          <div class="hero-card">
+            <div class="num">9.2</div>
+            <div class="label">本周口碑最高</div>
+            <div class="sub">《流人》第四季</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container layout">
+      <!-- 左频道索引 -->
+      <aside class="channel-index" aria-label="频道索引">
+        <h2>频道索引</h2>
+        <ul>
+          <li><a href="/#categories"><span class="dot"></span>悬疑罪案</a></li>
+          <li><a href="/#categories"><span class="dot"></span>科幻奇幻</a></li>
+          <li><a href="/#categories"><span class="dot"></span>剧情正剧</a></li>
+          <li><a href="/#categories"><span class="dot"></span>喜剧脱口秀</a></li>
+          <li><a href="/#categories"><span class="dot"></span>限定剧</a></li>
+          <li><a href="/#categories"><span class="dot"></span>医疗律政</a></li>
+          <li><a href="/#categories"><span class="dot"></span>古装历史</a></li>
+          <li><a href="/#categories"><span class="dot"></span>动画成人向</a></li>
+          <li><a href="/#categories"><span class="dot"></span>真人秀</a></li>
+          <li><a href="/#categories"><span class="dot"></span>英剧进口</a></li>
+        </ul>
+      </aside>
+
+      <!-- 主内容区 -->
+      <div class="main-content">
+
+        <!-- 1. 主题领域概览 -->
+        <section id="overview" aria-labelledby="overview-title">
+          <div class="section-head">
+            <h2 id="overview-title"><span class="accent-line"></span>美剧领域概览</h2>
+          </div>
+          <div class="overview-box">
+            <p><strong>九九美剧</strong>关注的是美国电视剧集这一内容领域。美剧涵盖的范围很广：公共电视网（NBC、CBS、ABC、FOX）以每周一集的固定节奏播出，流媒体平台（Netflix、HBO Max、Apple TV+、Disney+）则常常一次性放出整季，播出模式直接决定了追剧体验。从类型上看，罪案程序剧、科幻世界观剧、限定剧、医疗律政剧和成人动画各有固定的观众群和制作逻辑。</p>
+            <p>当前值得关注的具体方向包括：<strong>《怪奇物语》第五季</strong>进入最终季，怀旧科幻与小镇恐怖的组合仍是流媒体热度中心；<strong>《流人》第四季</strong>延续英式谍战与冷幽默，口碑持续走高；<strong>《白莲花度假村》第三季</strong>把讽刺舞台搬到泰国，每集一个度假村群像；<strong>《匹兹堡医护前线》</strong>以急诊室实时叙事拿下高讨论度。限定剧方面，<strong>《驯鹿宝贝》</strong>和<strong>《免责声明》</strong>代表了两种截然不同的心理惊悚路线。</p>
+            <p>判断一部美剧是否值得投入时间，通常看三个维度：主创过往作品、播出平台给予的制作规格、以及首季评分与续订情况。公共台剧集偏重单元故事和大众收视，流媒体剧集更倾向于长线叙事和作者表达。了解这些差异，比单纯追热度更能找到符合自己口味的剧。</p>
+          </div>
+        </section>
+
+        <!-- 2. 精选内容推荐 -->
+        <section id="picks" aria-labelledby="picks-title">
+          <div class="section-head">
+            <h2 id="picks-title"><span class="accent-line"></span>本周精选剧集</h2>
+            <a href="/#updates" class="more">查看全部更新 →</a>
+          </div>
+          <div class="card-grid">
+            <article class="series-card">
+              <div class="cover">
+                <img src="https://picsum.photos/seed/stranger-s5-11/400/300" alt="怪奇物语第五季剧照" width="400" height="300" loading="lazy">
+                <span class="badge">最终季</span>
+              </div>
+              <div class="card-body">
+                <h3>怪奇物语 第五季</h3>
+                <div class="meta"><span>科幻</span><span>恐怖</span><span>1980s</span></div>
+                <p class="desc">霍金斯小镇的终局之战。第五季分三部分上线，第 3 集已于 11 月 8 日更新，Vecna 的起源线索在本季集中回收。</p>
+                <div class="stats"><span>热度 98.4</span><span class="score">9.1 分</span></div>
+              </div>
+            </article>
+
+            <article class="series-card">
+              <div class="cover">
+                <img src="https://picsum.photos/seed/slow-horses-s4-07/400/300" alt="流人第四季剧照" width="400" height="300" loading="lazy">
+                <span class="badge">英剧</span>
+              </div>
+              <div class="card-body">
+                <h3>流人 第四季</h3>
+                <div class="meta"><span>谍战</span><span>黑色幽默</span><span>军情五处</span></div>
+                <p class="desc">加里·奥德曼饰演的杰克逊·兰姆继续带领“废柴特工组”处理军情五处的脏活。第 8 集已上线，本季围绕一次内部泄密展开。</p>
+                <div class="stats"><span>热度 91.2</span><span class="score">9.2 分</span></div>
+              </div>
+            </article>
+
+            <article class="series-card">
+              <div class="cover">
+                <img src="https://picsum.photos/seed/white-lotus-s3-14/400/300" alt="白莲花度假村第三季剧照" width="400" height="300" loading="lazy">
+                <span class="badge">讽刺剧</span>
+              </div>
+              <div class="card-body">
+                <h3>白莲花度假村 第三季</h3>
+                <div class="meta"><span>群像</span><span>社会讽刺</span><span>泰国</span></div>
+                <p class="desc">新一季把镜头对准泰国苏梅岛的奢华度假村，延续每季一群富人、一桩命案的配方。第 6 集更新，本季聚焦灵性与阶级的碰撞。</p>
+                <div class="stats"><span>热度 87.6</span><span class="score">8.8 分</span></div>
+              </div>
+            </article>
+
+            <article class="series-card">
+              <div class="cover">
+                <img src="https://picsum.photos/seed/the-pitt-er-09/400/300" alt="匹兹堡医护前线剧照" width="400" height="300" loading="lazy">
+                <span class="badge">医疗</span>
+              </div>
+              <div class="card-body">
+                <h3>匹兹堡医护前线</h3>
+                <div class="meta"><span>急诊室</span><span>实时叙事</span><span>HBO</span></div>
+                <p class="desc">每一集对应急诊室的一个小时，用实时叙事呈现医护人员的轮班压力。第 9 集更新，本集围绕一次大规模交通事故展开。</p>
+                <div class="stats"><span>热度 82.3</span><span class="score">8.9 分</span></div>
+              </div>
+            </article>
+
+            <article class="series-card">
+              <div class="cover">
+                <img src="https://picsum.photos/seed/baby-reindeer-05/400/300" alt="驯鹿宝贝剧照" width="400" height="300" loading="lazy">
+                <span class="badge">限定剧</span>
+              </div>
+              <div class="card-body">
+                <h3>驯鹿宝贝</h3>
+                <div class="meta"><span>心理惊悚</span><span>真实改编</span><span>跟踪</span></div>
+                <p class="desc">基于编剧真实经历改编的七集限定剧，讲述一个落魄喜剧演员与一位女跟踪者之间逐渐失控的关系。全季已一次性上线。</p>
+                <div class="stats"><span>热度 79.8</span><span class="score">8.7 分</span></div>
+              </div>
+            </article>
+
+            <article class="series-card">
+              <div class="cover">
+                <img src="https://picsum.photos/seed/disclaimer-03/400/300" alt="免责声明剧照" width="400" height="300" loading="lazy">
+                <span class="badge">心理剧</span>
+              </div>
+              <div class="card-body">
+                <h3>免责声明</h3>
+                <div class="meta"><span>阿方索·卡隆</span><span>悬疑</span><span>凯特·布兰切特</span></div>
+                <p class="desc">凯特·布兰切特主演的七集限定剧，一位纪录片记者发现一本小说影射自己不为人知的过去。卡隆执导全部集数，视听语言极具压迫感。</p>
+                <div class="stats"><span>热度 76.4</span><span class="score">8.5 分</span></div>
+              </div>
+            </article>
+
+            <article class="series-card">
+              <div class="cover">
+                <img src="https://picsum.photos/seed/severance-s2-10/400/300" alt="人生切割术第二季剧照" width="400" height="300" loading="lazy">
+                <span class="badge">科幻</span>
+              </div>
+              <div class="card-body">
+                <h3>人生切割术 第二季</h3>
+                <div class="meta"><span>职场</span><span>反乌托邦</span><span>Apple TV+</span></div>
+                <p class="desc">卢蒙公司的“分离”技术揭开更多内幕，马克的“外部”与“内部”人格开始出现裂缝。第二季已完结，第 10 集为季终。</p>
+                <div class="stats"><span>热度 74.1</span><span class="score">8.8 分</span></div>
+              </div>
+            </article>
+
+            <article class="series-card">
+              <div class="cover">
+                <img src="https://picsum.photos/seed/gilded-age-s3-06/400/300" alt="镀金时代第三季剧照" width="400" height="300" loading="lazy">
+                <span class="badge">时代剧</span>
+              </div>
+              <div class="card-body">
+                <h3>镀金时代 第三季</h3>
+                <div class="meta"><span>历史</span><span>纽约</span><span>贵族</span></div>
+                <p class="desc">19 世纪末纽约上流社会的权力博弈进入新一季，Bertha 与 George 的联盟面临来自新贵家族的挑战。第 6 集更新，服装与布景仍是看点。</p>
+                <div class="stats"><span>热度 68.9</span><span class="score">8.4 分</span></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 3. 最新更新 / 热播动态 -->
+        <section id="updates" aria-labelledby="updates-title">
+          <div class="section-head">
+            <h2 id="updates-title"><span class="accent-line"></span>分集更新与热播动态</h2>
+            <span class="more">11 月 8 日</span>
+          </div>
+          <div class="update-list">
+            <div class="update-item">
+              <span class="time-tag">今天 09:30</span>
+              <div class="update-body"><div class="title">怪奇物语 第五季</div><div class="summary">第 3 集上线，Vecna 的童年记忆片段首次完整呈现。</div></div>
+              <span class="ep">S5E3</span>
+            </div>
+            <div class="update-item">
+              <span class="time-tag">今天 08:00</span>
+              <div class="update-body"><div class="title">白莲花度假村 第三季</div><div class="summary">第 6 集更新，泰国度假村的灵修导师成为本集焦点。</div></div>
+              <span class="ep">S3E6</span>
+            </div>
+            <div class="update-item">
+              <span class="time-tag">昨天 21:10</span>
+              <div class="update-body"><div class="title">流人 第四季</div><div class="summary">第 8 集上线，兰姆与内鬼在伦敦码头正面交锋。</div></div>
+              <span class="ep">S4E8</span>
+            </div>
+            <div class="update-item">
+              <span class="time-tag">昨天 18:45</span>
+              <div class="update-body"><div class="title">匹兹堡医护前线</div><div class="summary">第 9 集更新，急诊室迎来连环车祸伤员潮。</div></div>
+              <span class="ep">S1E9</span>
+            </div>
+            <div class="update-item">
+              <span class="time-tag">11 月 6 日</span>
+              <div class="update-body"><div class="title">镀金时代 第三季</div><div class="summary">第 6 集上线，新贵家族在慈善晚宴上公开叫板老钱圈。</div></div>
+              <span class="ep">S3E6</span>
+            </div>
+            <div class="update-item">
+              <span class="time-tag">11 月 5 日</span>
+              <div class="update-body"><div class="title">人生切割术 第二季</div><div class="summary">第 10 集季终上线，分离技术的外部应用被正式曝光。</div></div>
+              <span class="ep">S2E10</span>
+            </div>
+            <div class="update-item">
+              <span class="time-tag">11 月 4 日</span>
+              <div class="update-body"><div class="title">免责声明</div><div class="summary">全七集一次性上线，阿方索·卡隆担任导演与联合编剧。</div></div>
+              <span class="ep">全季</span>
+            </div>
+            <div class="update-item">
+              <span class="time-tag">11 月 3 日</span>
+              <div class="update-body"><div class="title">驯鹿宝贝</div><div class="summary">全七集上线，基于编剧理查德·加德真实经历改编。</div></div>
+              <span class="ep">全季</span>
+            </div>
+            <div class="update-item">
+              <span class="time-tag">11 月 2 日</span>
+              <div class="update-body"><div class="title">怪奇物语 第五季</div><div class="summary">第 1—2 集上线，最终季分三部分播出的第一部分开启。</div></div>
+              <span class="ep">S5E1-2</span>
+            </div>
+            <div class="update-item">
+              <span class="time-tag">11 月 1 日</span>
+              <div class="update-body"><div class="title">流人 第四季</div><div class="summary">第 1—6 集一次性放出，本季共 8 集。</div></div>
+              <span class="ep">S4E1-6</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. 分类入口 -->
+        <section id="categories" aria-labelledby="categories-title">
+          <div class="section-head">
+            <h2 id="categories-title"><span class="accent-line"></span>类型频道</h2>
+          </div>
+          <div class="category-grid">
+            <a href="/#picks" class="category-item">悬疑罪案<span class="count">86 部</span></a>
+            <a href="/#picks" class="category-item">科幻奇幻<span class="count">64 部</span></a>
+            <a href="/#picks" class="category-item">剧情正剧<span class="count">112 部</span></a>
+            <a href="/#picks" class="category-item">喜剧脱口秀<span class="count">58 部</span></a>
+            <a href="/#picks" class="category-item">限定剧<span class="count">73 部</span></a>
+            <a href="/#picks" class="category-item">医疗律政<span class="count">41 部</span></a>
+            <a href="/#picks" class="category-item">古装历史<span class="count">29 部</span></a>
+            <a href="/#picks" class="category-item">动画成人向<span class="count">22 部</span></a>
+          </div>
+        </section>
+
+        <!-- 5. 深度解析正文 -->
+        <section id="deep-dive" aria-labelledby="deep-dive-title">
+          <div class="section-head">
+            <h2 id="deep-dive-title"><span class="accent-line"></span>深度解析：美剧的播出模式与类型选择</h2>
+          </div>
+          <div class="deep-dive">
+            <h3>公共台与流媒体的播出节奏差异</h3>
+            <p>美剧的观看体验首先由播出模式决定。公共电视网（如 NBC、CBS、ABC）通常采用“秋季首播 + 每周一集 + 冬歇 + 春季续播”的季播制，一季 18—24 集。这种模式适合单元剧，比如罪案程序剧《海军罪案调查处》或医疗剧《实习医生格蕾》，每集一个独立病例或案件，错过一集影响不大。而流媒体平台（Netflix、HBO Max、Apple TV+）更倾向于 8—10 集的短季，一次性放出或每周放出，叙事上可以更加连续，观众需要从头看到尾才能理解人物弧线。</p>
+            <p>以 2026 年 11 月的实际排播为例，《怪奇物语》第五季采用分三部分放出的策略，第一部分 4 集、第二部分 3 集、第三部分 2 集，中间各有数周间隔。这种做法既维持了话题热度，也给了制作团队完成后期的时间。而《免责声明》和《驯鹿宝贝》作为限定剧，全季一次性上线，适合周末集中刷完。</p>
+
+            <h3>类型剧的判断维度</h3>
+            <p>不同类型的剧，评判标准并不相同。罪案剧看的是案件设计的巧思和主角团队的化学反应；科幻剧看的是世界观设定的自洽程度和视觉呈现；限定剧看的是剧本的完整度和主演的表演空间；时代剧则要看服化道还原度和时代氛围的营造。同样是高分剧，<strong>《流人》</strong>的 9.2 分来自对白密度和角色塑造，而<strong>《匹兹堡医护前线》</strong>的 8.9 分更多来自实时叙事的形式创新。</p>
+            <ul>
+              <li><strong>罪案程序剧</strong>：单集独立案件 + 贯穿线索，适合碎片时间观看，代表如《海军罪案调查处》《犯罪心理》。</li>
+              <li><strong>科幻世界观剧</strong>：需要连续追看，设定信息量大，代表如《怪奇物语》《人生切割术》《三体》美剧版。</li>
+              <li><strong>限定剧</strong>：集数固定、故事闭环，适合不想追长线的观众，代表如《驯鹿宝贝》《免责声明》。</li>
+              <li><strong>时代剧</strong>：节奏偏慢，看重氛围与细节，代表如《镀金时代》《王冠》。</li>
+            </ul>
+
+            <h3>如何判断一部新剧是否值得开追</h3>
+            <p>面对每周都有新剧上线的局面，几个具体信号可以帮助判断。首先是主创履历：如果剧集由《绝命毒师》的编剧团队或《继承之战》的导演执导，品质下限通常有保障。其次是平台投入：HBO 和 Apple TV+ 的单集制作成本普遍较高，视觉规格和演员阵容往往更强。第三是首季续订情况：公共台剧集如果在播出后三周内获得全季续订，说明收视达标；流媒体剧集则看平台是否在首月内宣布第二季。</p>
+            <p>另外，评分平台的分布也有参考价值。以 2026 年 11 月的数据为例，《流人》第四季在观众口碑和媒体评价上高度一致，《白莲花度假村》第三季则出现了媒体评分高于观众评分的情况，这通常意味着剧集的社会讽刺意图较强，普通观众可能觉得距离感明显。选择时可以根据自己更看重“爽感”还是“表达”来做取舍。</p>
+
+            <h3>追剧的时间成本与观看顺序</h3>
+            <p>长线剧集的入坑成本差异很大。《怪奇物语》前四季共 34 集，加上第五季已播出的 3 集，总时长超过 30 小时；而《驯鹿宝贝》全季只有 7 集、约 4 小时。对于时间有限的观众，从限定剧或单季短剧入手是更稳妥的选择。如果决定追一部长线剧，建议先看第一季的前三集，判断人物和世界观是否吸引自己，再决定是否补完前几季。</p>
+            <p>对于同时追多部剧的观众，可以按播出节奏分组：每周更新的剧集固定一天集中看，一次性放出的限定剧留到周末。这样既能跟上话题讨论，又不会因为积压太多而产生追剧疲劳。</p>
+          </div>
+        </section>
+
+        <!-- 6. 体验指南 / 消费路径 -->
+        <section id="guide" aria-labelledby="guide-title">
+          <div class="section-head">
+            <h2 id="guide-title"><span class="accent-line"></span>美剧观看路径指南</h2>
+          </div>
+          <div class="guide-steps">
+            <div class="guide-step">
+              <div class="gs-body">
+                <h4>先确定自己的类型偏好</h4>
+                <p>如果喜欢强情节和反转，优先从悬疑罪案或心理惊悚类入手，如《流人》《驯鹿宝贝》；如果偏好世界观和想象力，从科幻奇幻类开始，如《怪奇物语》《人生切割术》；如果想轻松下饭，选喜剧或单元剧。</p>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="gs-body">
+                <h4>用首季前三集做判断</h4>
+                <p>大部分美剧在第一季前三集就会确立叙事节奏和人物关系。公共台剧集第一集通常有完整案件，流媒体剧集则更依赖前两集铺设世界观。如果三集之后仍然没有投入感，不必勉强。</p>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="gs-body">
+                <h4>比较同类型剧的更新方式</h4>
+                <p>周更剧适合跟话题，一次性放出的剧适合集中刷。同一类型下，限定剧的剧本通常更紧凑，长线剧的人物成长更充分。根据自己每周能投入的时间量来选择。</p>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="gs-body">
+                <h4>参考口碑但注意样本差异</h4>
+                <p>媒体评分和观众评分有时差异很大。社会讽刺类剧集（如《白莲花度假村》）媒体分常高于观众分，而爆米花属性强的剧集则相反。看评分时留意评论样本的构成，比单看分数更有参考价值。</p>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="gs-body">
+                <h4>规划追剧时间，避免积压</h4>
+                <p>同时跟超过三部周更剧容易产生疲劳。建议每周固定跟一部周更剧，再搭配一部限定剧或已完结剧集作为补充，保持观看的新鲜感。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. FAQ -->
+        <section id="faq" aria-labelledby="faq-title">
+          <div class="section-head">
+            <h2 id="faq-title"><span class="accent-line"></span>常见问题</h2>
+          </div>
+          <div class="faq-list">
+            <details>
+              <summary>美剧一般多久更新一集？</summary>
+              <div class="faq-answer">公共电视网剧集通常每周更新一集，秋季档从 9 月持续到次年 5 月，中间有冬歇。流媒体剧集有两种模式：一次性放出全季，或每周更新一集。《怪奇物语》第五季采用分三部分、每部分间隔数周放出的方式。</div>
+            </details>
+            <details>
+              <summary>限定剧和常规剧集有什么区别？</summary>
+              <div class="faq-answer">限定剧（Limited Series）集数固定、故事在一季内闭环，不续订第二季，如《驯鹿宝贝》《免责声明》。常规剧集则按季续订，人物和世界观可以持续发展，如《实习医生格蕾》已播出超过 20 季。</div>
+            </details>
+            <details>
+              <summary>第一次接触美剧，从哪部开始看比较好？</summary>
+              <div class="faq-answer">如果偏好紧凑叙事，可以从限定剧入手，比如《驯鹿宝贝》（7 集）或《免责声明》（7 集）。如果喜欢科幻，从《怪奇物语》第一季开始。喜欢英式幽默和谍战的，可以从《流人》第一季开始，每季 6—8 集，门槛不高。</div>
+            </details>
+            <details>
+              <summary>流媒体剧集和公共台剧集，制作上有什么不同？</summary>
+              <div class="faq-answer">公共台剧集一季通常 18—24 集，单集预算相对有限，更依赖单元故事和广告收入。流媒体剧集一季 8—10 集，单集预算更高，叙事更连续，视觉规格和演员阵容往往更强，但集数少、节奏更快。</div>
+            </details>
+            <details>
+              <summary>美剧的评分一般看哪个平台比较准？</summary>
+              <div class="faq-answer">IMDb 的观众样本量大，适合看大众口碑；烂番茄的媒体评分和观众爆米花指数可以对比看分歧；豆瓣的美剧评分对中文观众参考价值较高。三个平台结合看，能更全面判断一部剧的口碑位置。</div>
+            </details>
+            <details>
+              <summary>已经完结的美剧还值得补吗？</summary>
+              <div class="faq-answer">值得，很多完结剧集的口碑在完结后才逐渐沉淀。比如《绝命毒师》《火线》《广告狂人》都是完结多年后仍被反复讨论的作品。补完结剧的好处是不用等更新，可以按自己的节奏连续观看。</div>
+            </details>
+          </div>
+        </section>
+
+        <!-- 8. 用户评论 -->
+        <section id="comments" aria-labelledby="comments-title">
+          <div class="section-head">
+            <h2 id="comments-title"><span class="accent-line"></span>观众讨论</h2>
+          </div>
+          <div class="comment-grid">
+            <div class="comment-card"><div class="user"><span class="avatar">H</span><span class="nickname">浣熊市居民</span></div><div class="msg">《流人》第四季第 8 集码头那场戏，兰姆的台词密度还是那么高，加里·奥德曼真是把这角色演活了。</div></div>
+            <div class="comment-card"><div class="user"><span class="avatar">L</span><span class="nickname">洛杉矶夜班</span></div><div class="msg">《匹兹堡医护前线》用实时叙事拍急诊室，第 9 集车祸伤员潮那段长镜头调度太强了，看完有点喘不过气。</div></div>
+            <div class="comment-card"><div class="user"><span class="avatar">C</span><span class="nickname">长岛冰茶</span></div><div class="msg">《白莲花度假村》第三季第 6 集，灵修导师那条线终于收束了，感觉这季比第二季更聚焦阶级议题。</div></div>
+            <div class="comment-card"><div class="user"><span class="avatar">S</span><span class="nickname">盐湖城的风</span></div><div class="msg">《怪奇物语》第五季分三部分放出有点折磨人，第 3 集刚看完 Vecna 的回忆，下一部分要等好几周。</div></div>
+            <div class="comment-card"><div class="user"><span class="avatar">M</span><span class="nickname">午夜场观众</span></div><div class="msg">《驯鹿宝贝》看到第三集就有点坐不住了，那种被跟踪的窒息感拍得太真实，主演的表演很克制。</div></div>
+            <div class="comment-card"><div class="user"><span class="avatar">D</span><span class="nickname">底特律机修工</span></div><div class="msg">《免责声明》的摄影和配乐很卡隆，凯特·布兰切特那种冷静下的崩溃演得很好，就是节奏偏慢。</div></div>
+            <div class="comment-card"><div class="user"><span class="avatar">P</span><span class="nickname">波特兰雨季</span></div><div class="msg">《人生切割术》第二季季终把分离技术的商业应用揭开了，第三季的走向有点难猜，希望别烂尾。</div></div>
+            <div class="comment-card"><div class="user"><span class="avatar">N</span><span class="nickname">纳什维尔吉他</span></div><div class="msg">《镀金时代》第三季的服装还是那么精致，但剧情推进有点慢，第 6 集晚宴那场戏算是本季目前最有张力的。</div></div>
+            <div class="comment-card"><div class="user"><span class="avatar">A</span><span class="nickname">奥斯汀骑手</span></div><div class="msg">个人觉得《白莲花》第三季不如第一季锋利，泰国背景好看是好看，但讽刺的落点有点散。</div></div>
+            <div class="comment-card"><div class="user"><span class="avatar">E</span><span class="nickname">西雅图咖啡师</span></div><div class="msg">《流人》第四季第 8 集看完，感觉这季的阴谋线收得比第三季利落，期待下一季。</div></div>
+            <div class="comment-card"><div class="user"><span class="avatar">R</span><span class="nickname">里士满球迷</span></div><div class="msg">《匹兹堡医护前线》第 9 集那个长镜头从走廊一路跟到抢救室，调度比很多电影都强。</div></div>
+            <div class="comment-card"><div class="user"><span class="avatar">J</span><span class="nickname">泽西海岸</span></div><div class="msg">《怪奇物语》第五季第 3 集的小镇回忆片段填了不少前四季的坑，但节奏比预期慢一些。</div></div>
+            <div class="comment-card"><div class="user"><span class="avatar">T</span><span class="nickname">多伦多枫叶</span></div><div class="msg">《免责声明》里凯特·布兰切特在威尼斯那段戏，镜头语言很值得细看，卡隆还是稳。</div></div>
+            <div class="comment-card"><div class="user"><span class="avatar">K</span><span class="nickname">堪萨斯麦田</span></div><div class="msg">《驯鹿宝贝》全季看完，最后两集的情绪处理很克制，没有刻意煽情，这点很难得。</div></div>
+            <div class="comment-card"><div class="user"><span class="avatar">V</span><span class="nickname">温哥华雨林</span></div><div class="msg">《人生切割术》第二季第 10 集那个董事会场景，冷色调和对称构图还是熟悉的味道。</div></div>
+            <div class="comment-card"><div class="user"><span class="avatar">B</span><span class="nickname">波士顿查尔斯</span></div><div class="msg">《镀金时代》第三季新贵家族那条线写得比老钱家族有意思，第 6 集晚宴对峙戏份好看。</div></div>
+          </div>
+        </section>
+
+        <!-- 9. 相关资讯 -->
+        <section id="news" aria-labelledby="news-title">
+          <div class="section-head">
+            <h2 id="news-title"><span class="accent-line"></span>美剧相关资讯</h2>
+          </div>
+          <div class="news-list">
+            <article class="news-item">
+              <span class="news-date">2026-11-08</span>
+              <div class="news-body">
+                <h4>《怪奇物语》第五季第一部分上线，Vecna 起源线索集中回收</h4>
+                <p>最终季第一部分 4 集于 11 月 8 日全部播出，第 3 集集中呈现了 Vecna 的童年记忆，前四季的多处伏笔在本部分得到解释。</p>
+              </div>
+            </article>
+            <article class="news-item">
+              <span class="news-date">2026-11-06</span>
+              <div class="news-body">
+                <h4>《流人》第四季收视创新高，第五季已进入前期制作</h4>
+                <p>第四季第 8 集上线后，Apple TV+ 宣布该剧成为平台本季度观看时长最高的英剧，第五季剧本已完成初稿。</p>
+              </div>
+            </article>
+            <article class="news-item">
+              <span class="news-date">2026-11-04</span>
+              <div class="news-body">
+                <h4>阿方索·卡隆《免责声明》全七集上线，媒体评价两极</h4>
+                <p>凯特·布兰切特主演的心理惊悚限定剧上线后，媒体普遍肯定其视听语言，但也有评论认为叙事故弄玄虚，观众爆米花指数暂为 78%。</p>
+              </div>
+            </article>
+            <article class="news-item">
+              <span class="news-date">2026-11-02</span>
+              <div class="news-body">
+                <h4>《匹兹堡医护前线》续订第二季，实时叙事形式将保留</h4>
+                <p>HBO 确认这部急诊室题材剧集续订第二季，主创表示第二季仍将采用每集对应一小时的实时叙事结构。</p>
+              </div>
+            </article>
+            <article class="news-item">
+              <span class="news-date">2026-10-30</span>
+              <div class="news-body">
+                <h4>《白莲花度假村》第三季拍摄地带动泰国苏梅岛旅游热</h4>
+                <p>剧集播出后，苏梅岛多家度假村表示预订量同比上涨，剧中出现的灵修课程和海滩场景成为游客打卡热点。</p>
+              </div>
+            </article>
+            <article class="news-item">
+              <span class="news-date">2026-10-27</span>
+              <div class="news-body">
+                <h4>《人生切割术》第二季季终后，第三季制作传闻升温</h4>
+                <p>第二季第 10 集播出后，主创在采访中表示第三季的故事框架已有初步构想，但尚未获得 Apple TV+ 的正式续订。</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 10. 相关推荐 -->
+        <section id="related" aria-labelledby="related-title">
+          <div class="section-head">
+            <h2 id="related-title"><span class="accent-line"></span>相关推荐方向</h2>
+          </div>
+          <div class="tag-cloud">
+            <a href="/#picks">英式谍战剧推荐</a>
+            <a href="/#picks">真实事件改编限定剧</a>
+            <a href="/#picks">职场科幻剧集</a>
+            <a href="/#picks">19 世纪纽约时代剧</a>
+            <a href="/#picks">急诊室医疗剧</a>
+            <a href="/#picks">社会讽刺群像剧</a>
+            <a href="/#picks">小镇恐怖科幻</a>
+            <a href="/#picks">心理惊悚短剧</a>
+          </div>
+        </section>
+
+        <!-- 11. 补充板块：热门榜单 -->
+        <section id="ranking" aria-labelledby="ranking-title">
+          <div class="section-head">
+            <h2 id="ranking-title"><span class="accent-line"></span>本周观众热度榜</h2>
+            <span class="more">截至 11 月 8 日</span>
+          </div>
+          <div class="ranking-list">
+            <div class="rank-item"><span class="rank-num">1</span><span class="rank-name">怪奇物语 第五季</span><span class="rank-tag">科幻</span><span class="rank-score">98.4</span></div>
+            <div class="rank-item"><span class="rank-num">2</span><span class="rank-name">流人 第四季</span><span class="rank-tag">谍战</span><span class="rank-score">91.2</span></div>
+            <div class="rank-item"><span class="rank-num">3</span><span class="rank-name">白莲花度假村 第三季</span><span class="rank-tag">讽刺</span><span class="rank-score">87.6</span></div>
+            <div class="rank-item"><span class="rank-num">4</span><span class="rank-name">匹兹堡医护前线</span><span class="rank-tag">医疗</span><span class="rank-score">82.3</span></div>
+            <div class="rank-item"><span class="rank-num">5</span><span class="rank-name">驯鹿宝贝</span><span class="rank-tag">限定剧</span><span class="rank-score">79.8</span></div>
+            <div class="rank-item"><span class="rank-num">6</span><span class="rank-name">免责声明</span><span class="rank-tag">心理剧</span><span class="rank-score">76.4</span></div>
+            <div class="rank-item"><span class="rank-num">7</span><span class="rank-name">人生切割术 第二季</span><span class="rank-tag">科幻</span><span class="rank-score">74.1</span></div>
+            <div class="rank-item"><span class="rank-num">8</span><span class="rank-name">镀金时代 第三季</span><span class="rank-tag">时代剧</span><span class="rank-score">68.9</span></div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- 右侧辅助栏 -->
+      <aside class="sidebar" aria-label="辅助信息">
+        <div class="side-box">
+          <h3>今日更新速览</h3>
+          <ul>
+            <li><span class="name">怪奇物语 S5E3</span><span class="val">09:30</span></li>
+            <li><span class="name">白莲花 S3E6</span><span class="val">08:00</span></li>
+            <li><span class="name">流人 S4E8</span><span class="val">昨天</span></li>
+            <li><span class="name">匹兹堡医护 S1E9</span><span class="val">昨天</span></li>
+            <li><span class="name">镀金时代 S3E6</span><span class="val">11-06</span></li>
+          </ul>
+        </div>
+        <div class="side-box">
+          <h3>高分剧集榜</h3>
+          <ul>
+            <li><span class="name">流人 第四季</span><span class="val">9.2</span></li>
+            <li><span class="name">怪奇物语 第五季</span><span class="val">9.1</span></li>
+            <li><span class="name">匹兹堡医护前线</span><span class="val">8.9</span></li>
+            <li><span class="name">人生切割术 第二季</span><span class="val">8.8</span></li>
+            <li><span class="name">白莲花度假村 第三季</span><span class="val">8.8</span></li>
+          </ul>
+        </div>
+        <div class="side-box">
+          <h3>新剧定档提醒</h3>
+          <ul>
+            <li><span class="name">《无间警探》第五季</span><span class="val">11-15</span></li>
+            <li><span class="name">《熊家餐馆》第四季</span><span class="val">11-20</span></li>
+            <li><span class="name">《继承之战》衍生剧</span><span class="val">12-01</span></li>
+            <li><span class="name">《怒呛人生》第二季</span><span class="val">12-08</span></li>
+          </ul>
+        </div>
+        <div class="side-box">
+          <h3>类型速览</h3>
+          <ul>
+            <li><span class="name">悬疑罪案</span><span class="val">86 部</span></li>
+            <li><span class="name">科幻奇幻</span><span class="val">64 部</span></li>
+            <li><span class="name">剧情正剧</span><span class="val">112 部</span></li>
+            <li><span class="name">限定剧</span><span class="val">73 部</span></li>
+            <li><span class="name">喜剧</span><span class="val">58 部</span></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- 页尾 -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand">
+            <svg viewBox="0 0 34 34" fill="none" aria-hidden="true" style="width:28px;height:28px">
+              <rect width="34" height="34" rx="8" fill="#e5b567"/>
+              <path d="M11 24V10l13 7-13 7z" fill="#1a1e3c"/>
+            </svg>
+            九九美剧
+          </div>
+          <p>聚合美剧播出信息、分集更新与类型片单，帮助观众按自己的节奏找到下一部要追的剧。</p>
+        </div>
+        <div class="footer-col">
+          <h4>内容频道</h4>
+          <ul>
+            <li><a href="/#picks">精选剧集</a></li>
+            <li><a href="/#updates">分集更新</a></li>
+            <li><a href="/#categories">类型频道</a></li>
+            <li><a href="/#ranking">热度榜单</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>深度内容</h4>
+          <ul>
+            <li><a href="/#deep-dive">播出模式解析</a></li>
+            <li><a href="/#guide">观看路径指南</a></li>
+            <li><a href="/#faq">常见问题</a></li>
+            <li><a href="/#comments">观众讨论</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>资讯与推荐</h4>
+          <ul>
+            <li><a href="/#news">相关资讯</a></li>
+            <li><a href="/#related">相关推荐</a></li>
+            <li><a href="/#overview">领域概览</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 九九美剧 · 内容聚合示例页面</span>
+        <span>部分内容为示例数据，仅用于展示页面结构</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      // 搜索功能：在页面可见正文中查找并高亮/反馈
+      var searchInput = document.getElementById('siteSearch');
+      var searchBtn = document.getElementById('searchBtn');
+      var feedback = document.getElementById('searchFeedback');
+
+      function clearHighlights() {
+        var marks = document.querySelectorAll('mark.search-hit');
+        marks.forEach(function (m) {
+          var parent = m.parentNode;
+          parent.replaceChild(document.createTextNode(m.textContent), m);
+          parent.normalize();
+        });
+      }
+
+      function doSearch() {
+        clearHighlights();
+        var q = searchInput.value.trim();
+        if (!q) {
+          feedback.style.display = 'none';
+          feedback.textContent = '';
+          return;
+        }
+        // 仅在主内容区搜索
+        var main = document.querySelector('.main-content');
+        var walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT, {
+          acceptNode: function (node) {
+            if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+            var parent = node.parentNode;
+            if (['SCRIPT','STYLE','MARK'].indexOf(parent.tagName) !== -1) return NodeFilter.FILTER_REJECT;
+            return NodeFilter.FILTER_ACCEPT;
+          }
+        });
+        var count = 0;
+        var nodes = [];
+        while (walker.nextNode()) { nodes.push(walker.currentNode); }
+        // 从后往前替换，避免影响后续节点
+        for (var i = nodes.length - 1; i >= 0; i--) {
+          var node = nodes[i];
+          var text = node.nodeValue;
+          var idx = text.indexOf(q);
+          if (idx === -1) continue;
+          var frag = document.createDocumentFragment();
+          var last = 0;
+          while (idx !== -1) {
+            if (idx > last) frag.appendChild(document.createTextNode(text.slice(last, idx)));
+            var mark = document.createElement('mark');
+            mark.className = 'search-hit';
+            mark.style.background = '#f0e6d2';
+            mark.style.color = '#1a1e3c';
+            mark.style.padding = '0 1px';
+            mark.textContent = q;
+            frag.appendChild(mark);
+            count++;
+            last = idx + q.length;
+            idx = text.indexOf(q, last);
+          }
+          if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+          node.parentNode.replaceChild(frag, node);
+        }
+        if (count > 0) {
+          feedback.textContent = '找到 ' + count + ' 处相关结果';
+          feedback.style.display = 'inline-block';
+          feedback.style.color = '#b8860b';
+          // 滚动到第一个命中
+          var first = document.querySelector('mark.search-hit');
+          if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          feedback.textContent = '未找到相关剧集，试试其他关键词';
+          feedback.style.display = 'inline-block';
+          feedback.style.color = '#c0392b';
+        }
+      }
+
+      searchBtn.addEventListener('click', doSearch);
+      searchInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); doSearch(); }
+      });
+      // 输入清空时清除高亮
+      searchInput.addEventListener('input', function () {
+        if (!searchInput.value.trim()) {
+          clearHighlights();
+          feedback.style.display = 'none';
+          feedback.textContent = '';
+        }
+      });
+    })();
+  </script>
+</body>
+                                                         </html>
